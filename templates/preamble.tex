@@ -6,14 +6,17 @@
 \usepackage{hyperref}
 \usepackage{titlesec}
 \usepackage{enumitem}
+\usepackage{setspace}
 
 % --- DOCUMENT CONFIG ---
-\geometry{top=1.0cm, bottom=1.0cm, left=1.0cm, right=1.0cm}
+\geometry{top=0.9cm, bottom=0.9cm, left=1cm, right=1cm}
 \pagestyle{empty}
+\raggedbottom
+\AtBeginDocument{\linespread{0.93}\selectfont}
 
 % --- SPACING ---
-\setlist[itemize]{noitemsep, topsep=2pt, leftmargin=*}
-\setlength{\parskip}{2pt}
+\setlist[itemize]{noitemsep, topsep=0pt, parsep=0pt, partopsep=0pt, leftmargin=*}
+\setlength{\parskip}{0.5pt}
 \setlength{\parindent}{0pt}
 
 \hypersetup{
@@ -27,10 +30,7 @@
 \setcounter{secnumdepth}{0}
 
 \titleformat{\section}
-{\Large\bfseries}
-{}
-{0em}
-{}
-[\titlerule\vspace{0.4ex}]
+{\large\bfseries}{\thesection}{0em}{}
+[\vspace{0.2ex}\titlerule]
 
-\titlespacing*{\section}{0pt}{6pt}{4pt}
+\titlespacing*{\section}{0pt}{4pt}{1pt}
