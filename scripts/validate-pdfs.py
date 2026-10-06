@@ -42,9 +42,9 @@ DOCS = {
             "Resumo", "Experiência Profissional", "Projetos", "Formação Acadêmica",
             "Habilidades", "Idiomas", "Desenvolvedor de Software Pleno",
             "Análise e Desenvolvimento de Sistemas", "Inteligência Artificial",
-            "Português", "Técnico em Informática", "fiscais", "manipulação", "Piauí",
+            "Português", "Técnico em Informática", "fiscais", "acessibilidade", "Piauí",
             # "%" sem escape vira comentário no LaTeX e corta o resto da linha.
-            "100% dos pagamentos passam por ele, gerados pelo financeiro ou pelo próprio cliente",
+            "100% dos pagamentos passam por ele",
         ],
     },
     "en": {
@@ -52,8 +52,8 @@ DOCS = {
         "required": [
             "Summary", "Experience", "Projects", "Education", "Skills", "Languages",
             "Mid-level Software Developer", "Systems Analysis and Development",
-            "Artificial Intelligence", "financial", "field sales", "Piauí",
-            "100% of payments, whether created by the finance team or by customers",
+            "Artificial Intelligence", "therapeutic fit", "Piauí",
+            "it handles 100% of payments",
         ],
     },
 }

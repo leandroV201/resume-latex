@@ -5,7 +5,9 @@
 \pdfgentounicode=1
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern} % fontes vetoriais (Type 1) com acentos; evita bitmaps
+% Bitstream Charter: desenhada para continuar legível em baixa resolução,
+% com traço mais firme que a Latin Modern. O recrutador lê o PDF na tela.
+\usepackage{charter}
 \usepackage{microtype}
 \usepackage{geometry}
 \usepackage{parskip}
@@ -15,14 +17,15 @@
 \usepackage{setspace}
 
 % --- DOCUMENT CONFIG ---
-\geometry{top=0.9cm, bottom=0.9cm, left=1cm, right=1cm}
+% Margens laterais maiores: linhas de ~100 caracteres em vez de ~120.
+\geometry{top=0.9cm, bottom=0.8cm, left=1.4cm, right=1.4cm}
 \pagestyle{empty}
 \raggedbottom
-\AtBeginDocument{\linespread{0.93}\selectfont}
 
 % --- SPACING ---
-\setlist[itemize]{noitemsep, topsep=0pt, parsep=0pt, partopsep=0pt, leftmargin=*}
-\setlength{\parskip}{0.5pt}
+% Respiro entre bullets e entre seções: menos "parede de texto".
+\setlist[itemize]{itemsep=1.2pt, topsep=2pt, parsep=0pt, partopsep=0pt, leftmargin=1.1em}
+\setlength{\parskip}{1pt}
 \setlength{\parindent}{0pt}
 
 \hypersetup{
@@ -37,20 +40,32 @@
 
 \titleformat{\section}
 {\large\bfseries}{\thesection}{0em}{}
-[\vspace{0.2ex}\titlerule]
+[\vspace{0.3ex}\titlerule]
 
-\titlespacing*{\section}{0pt}{4pt}{1pt}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
 
-% Entrada de experiência/projeto/formação em uma linha:
-%   \cventry{cargo ou curso}{empresa ou instituição}{local (pode ficar vazio)}{datas}
-% Cargo, empresa e local ficam na mesma linha de texto, separados por "|":
-% com o local alinhado à direita, parsers de ATS liam a cidade como outra empresa.
-% As datas ficam à direita; se não couberem, vão inteiras para a linha de baixo,
+% Datas à direita; se não couberem, vão inteiras para a linha de baixo,
 % ainda alinhadas à direita (truque do \signed, TeXbook p. 106).
+\newcommand{\cvdates}[1]{%
+  {\unskip\nobreak\hfil\penalty50\hskip1.5em\hbox{}\nobreak\hfil
+   \mbox{\small\itshape #1}\parfillskip=0pt\finalhyphendemerits=0\par}}
+
+% Experiência e projetos, em uma linha:
+%   \cventry{empresa ou projeto}{cargo}{local (pode ficar vazio)}{datas}
+% A empresa vem primeiro e em negrito: é o que o recrutador procura ao bater o olho.
+% Tudo na mesma linha de texto, separado por "|": com o local alinhado à direita,
+% parsers de ATS liam a cidade como outra empresa.
 \newcommand{\cventry}[4]{%
   \par\addvspace{5pt}\noindent
   {\bfseries #1} \textbar{} #2%
   \if\relax\detokenize{#3}\relax\else{} \textbar{} #3\fi
-  {\unskip\nobreak\hfil\penalty50\hskip1.5em\hbox{}\nobreak\hfil
-   \mbox{\small\itshape #4}\parfillskip=0pt\finalhyphendemerits=0\par}%
+  \cvdates{#4}%
   \nopagebreak[4]}
+
+% Formação: curso em negrito com as datas; instituição na linha de baixo
+% (o nome completo da instituição não cabe na mesma linha das datas).
+%   \eduentry{curso}{instituição}{datas}
+\newcommand{\eduentry}[3]{%
+  \par\addvspace{5pt}\noindent
+  {\bfseries #1}\cvdates{#3}%
+  \nopagebreak[4]\noindent #2\par\nopagebreak[4]}
