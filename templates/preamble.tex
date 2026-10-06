@@ -42,9 +42,15 @@
 \titlespacing*{\section}{0pt}{4pt}{1pt}
 
 % Entrada de experiência/projeto/formação em uma linha:
-%   \cventry{cargo ou curso}{empresa ou instituição}{local}{datas}
+%   \cventry{cargo ou curso}{empresa ou instituição}{local (pode ficar vazio)}{datas}
 % Cargo, empresa e local ficam na mesma linha de texto, separados por "|":
 % com o local alinhado à direita, parsers de ATS liam a cidade como outra empresa.
+% As datas ficam à direita; se não couberem, vão inteiras para a linha de baixo,
+% ainda alinhadas à direita (truque do \signed, TeXbook p. 106).
 \newcommand{\cventry}[4]{%
   \par\addvspace{5pt}\noindent
-  {\bfseries #1} \textbar{} #2 \textbar{} #3\hfill{\small\itshape #4}\par\nopagebreak[4]}
+  {\bfseries #1} \textbar{} #2%
+  \if\relax\detokenize{#3}\relax\else{} \textbar{} #3\fi
+  {\unskip\nobreak\hfil\penalty50\hskip1.5em\hbox{}\nobreak\hfil
+   \mbox{\small\itshape #4}\parfillskip=0pt\finalhyphendemerits=0\par}%
+  \nopagebreak[4]}

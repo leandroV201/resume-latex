@@ -46,7 +46,7 @@ export const PT_BR: Content = {
         summary:
           'Nova geração do ERP da NextCompany, construída em microsserviços: cada rotina de negócio roda como um serviço independente.',
         bullets: [
-          'Desenvolvo módulos com Java (Spring Boot) no backend e Angular no frontend: bancário, vendas, compras, caixa, cargas, vendas externas e manipulação de bolsas de nutrição parenteral.',
+          'Já entreguei 3 módulos, com Java (Spring Boot) no backend e Angular no frontend. O sistema cobre bancário, vendas, compras, caixa, cargas, vendas externas e manipulação de bolsas de nutrição parenteral.',
           'Código proprietário, por isso não há repositório público.',
         ],
         note: {
@@ -90,11 +90,12 @@ export const PT_BR: Content = {
       nextcompany: {
         title: 'Desenvolvedor de Software Pleno',
         bullets: [
-          'wCompany 3G: módulos em Java (Spring Boot) e Angular, em arquitetura de microsserviços.',
-          'Parte fiscal do ERP: documentos fiscais eletrônicos (NF-e e NFC-e), regras de cálculo de tributos e obrigações acessórias (SPED).',
-          'Migrações de dados envolvendo bancos Firebird (diversas versões) e Oracle (18 e 21).',
+          'wCompany 3G: 3 módulos entregues em Java (Spring Boot) e Angular, em arquitetura de microsserviços.',
+          'Fiscal: manutenção, junto com o time, dos módulos de NF-e e NFC-e (incluindo regras de cálculo de tributos) e suporte às obrigações acessórias (SPED).',
+          'Migração de bases de clientes envolvendo Firebird (diversas versões) e Oracle (18 e 21); cada cliente tem sua própria base em servidor dedicado.',
+          'Portal do cliente para pagamento de faturas, integrado à API de pagamentos da Iugu.',
           'wCRM, o CRM em nuvem da empresa: backend em NestJS com SOLID e Clean Architecture, Kafka, Redis e Docker; frontend em React e TypeScript; relatórios em PostgreSQL (Prisma ORM) e dados fiscais em MongoDB.',
-          'Docker e Kubernetes nos ambientes da empresa, Qlik para análise de dados e times ágeis com Scrum e Kanban.',
+          'Time de 20 pessoas (5 desenvolvedores) com Scrum e Kanban; Docker e Kubernetes nos ambientes da empresa e Qlik para análise de dados.',
         ],
       },
       comunicare: {

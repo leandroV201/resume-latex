@@ -46,7 +46,7 @@ export const EN: Content = {
         summary:
           "The next generation of NextCompany's ERP, built on microservices: each business routine runs as an independent service.",
         bullets: [
-          'I build modules with Java (Spring Boot) on the backend and Angular on the frontend: banking, sales, purchasing, cash management, freight, field sales, and parenteral nutrition bag compounding.',
+          'I have delivered 3 modules so far, with Java (Spring Boot) on the backend and Angular on the frontend. The system covers banking, sales, purchasing, cash management, freight, field sales, and parenteral nutrition bag compounding.',
           'Proprietary code, so there is no public repository.',
         ],
         note: {
@@ -90,11 +90,12 @@ export const EN: Content = {
       nextcompany: {
         title: 'Mid-level Software Developer',
         bullets: [
-          'wCompany 3G: modules in Java (Spring Boot) and Angular on a microservices architecture.',
-          "The ERP's Brazilian tax features: electronic invoices (NF-e and NFC-e), tax calculation rules, and statutory reporting (SPED).",
-          'Data migrations involving Firebird (multiple versions) and Oracle (18 and 21) databases.',
+          'wCompany 3G: 3 modules delivered in Java (Spring Boot) and Angular on a microservices architecture.',
+          'Brazilian tax features: co-maintaining the NF-e and NFC-e electronic invoicing modules (including tax calculation rules) and supporting statutory reporting (SPED).',
+          'Customer database migrations involving Firebird (multiple versions) and Oracle (18 and 21); each customer runs its own database on a dedicated server.',
+          'Customer portal for invoice payments, integrated with the Iugu payments API.',
           "wCRM, the company's cloud CRM: NestJS backend with SOLID and Clean Architecture, Kafka, Redis and Docker; React and TypeScript frontend; PostgreSQL reports (Prisma ORM) and tax data in MongoDB.",
-          "Docker and Kubernetes in the company's environments, Qlik for data analysis, and Agile teams using Scrum and Kanban.",
+          '20-person team (5 developers) using Scrum and Kanban; Docker and Kubernetes in company environments and Qlik for data analysis.',
         ],
       },
       comunicare: {

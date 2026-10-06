@@ -108,13 +108,13 @@ export interface EducationFacts {
 export const EDUCATION: readonly EducationFacts[] = [
   {
     id: 'postgrad',
-    institution: 'UNINASSAU',
+    institution: 'Centro Universitário Maurício de Nassau (UNINASSAU)',
     period: { start: { year: 2025, month: 6 }, end: null },
     inProgress: true,
   },
   {
     id: 'ads',
-    institution: 'UNINASSAU',
+    institution: 'Centro Universitário Maurício de Nassau (UNINASSAU)',
     period: { start: { year: 2023, month: 1 }, end: { year: 2025, month: 1 } },
   },
   {
