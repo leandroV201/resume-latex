@@ -7,16 +7,11 @@
 *.fdb_latexmk
 *.synctex.gz
 
-# Build directory
-output/*.aux
-output/*.log
-output/*.out
-
 # OS / editor
 .DS_Store
 .vscode/
 
-
-# Saída do build dos CVs (gerada por scripts/build-cv.sh e pelo CI)
+# Saída do build dos CVs (gerada por scripts/build-cv.sh e pelo CI).
+# Nada aqui deve ser versionado: o CI falha se algum arquivo dessas pastas entrar no Git.
 build/
-output/leandro-cv-*.pdf
+output/

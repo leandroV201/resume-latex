@@ -27,6 +27,9 @@ PT-BR e EN contam **os mesmos fatos**. Ao mudar uma experiência, atualize:
 O validador de PDFs reprova o build se as datas do CV PT-BR e do EN divergirem, e um teste do portfolio
 reprova se as duas versões tiverem quantidades diferentes de itens.
 
+`output/` e `build/` são só saída de build e não vão para o Git: `build-cv.sh` esvazia `output/` antes de
+compilar (nenhum PDF/DOCX antigo sobra) e o CI falha se algum arquivo gerado for versionado.
+
 ## Rodar localmente
 
 Requisitos: TeX Live ou MiKTeX (com `latexmk`), poppler (`pdftotext`, `pdfinfo`, `pdffonts`), Python 3 e Node 24.

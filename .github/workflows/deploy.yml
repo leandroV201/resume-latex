@@ -22,6 +22,16 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # PDFs/DOCX são gerados pelo build; versionar cópias leva a currículos desatualizados no repo.
+      - name: Garantir que nenhum arquivo gerado está no Git
+        run: |
+          tracked=$(git ls-files -- output build portfolio/public/cv portfolio/dist)
+          if [ -n "$tracked" ]; then
+            echo "::error::Arquivos gerados versionados (remova com git rm --cached):"
+            echo "$tracked"
+            exit 1
+          fi
+
       - name: Instalar TeX Live e poppler
         run: |
           sudo apt-get update
