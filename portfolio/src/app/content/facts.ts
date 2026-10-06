@@ -187,15 +187,3 @@ export const SKILLS: Readonly<Record<SkillGroupId, readonly string[]>> = {
 };
 
 
-/**
- * Pintura do hero: Claude Monet, "Arrival of the Normandy Train, Gare
- * Saint-Lazare" (1877), Art Institute of Chicago, domínio público (imagem CC0).
- */
-export const HERO_ART = {
-  src: 'art/monet-gare-saint-lazare-1280.webp',
-  srcset:
-    'art/monet-gare-saint-lazare-800.webp 800w, art/monet-gare-saint-lazare-1280.webp 1280w, art/monet-gare-saint-lazare-1686.webp 1686w',
-  width: 1686,
-  height: 1265,
-  sourceUrl: 'https://www.artic.edu/artworks/16571',
-} as const;

@@ -1,26 +1,41 @@
 /* =========================================================================
-   Direção: catálogo de exposição impressionista.
-   Referência: Claude Monet, "Arrival of the Normandy Train, Gare
-   Saint-Lazare" (1877). As cores vêm do quadro: fumaça (fundo), ferro
-   (texto), cobalto das pinceladas do céu (ações) e o amarelo de um
-   lampião (só em marcas pequenas). Sem gradientes.
+   Direção: as séries de Monet (Montes de feno, Catedral de Rouen), o mesmo
+   motivo pintado em luzes diferentes ao longo do dia. A página muda de luz
+   conforme a rolagem: manhã (névoa azulada), dia, tarde (sombras violeta)
+   e anoitecer (ferro, com a luz amarela de um lampião). Só cores sólidas
+   que se transformam devagar; nenhuma imagem, nenhum gradiente.
    Tipos: Old Standard TT (tipos "Modern" impressos no fim do séc. XIX)
-   para nome, títulos e obras; Atkinson Hyperlegible Next para o texto.
+   para nome e títulos; Atkinson Hyperlegible Next para o texto.
    ========================================================================= */
+
+/* Cores registradas como <color>: assim a troca de luz é interpolada. */
+@property --paper { syntax: '<color>'; inherits: true; initial-value: #eceeea; }
+@property --surface { syntax: '<color>'; inherits: true; initial-value: #f7f8f5; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #1e2a2d; }
+@property --muted { syntax: '<color>'; inherits: true; initial-value: #4d5b5a; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #c9d1cb; }
+@property --line-strong { syntax: '<color>'; inherits: true; initial-value: #8a9996; }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #2c4c7c; }
+@property --accent-hover { syntax: '<color>'; inherits: true; initial-value: #213b61; }
+@property --accent-ink { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --accent-soft { syntax: '<color>'; inherits: true; initial-value: #d8e0ea; }
+@property --signal { syntax: '<color>'; inherits: true; initial-value: #a8740f; }
+
+/* Luz do dia (padrão) */
 :root {
   color-scheme: light;
 
-  --paper: #e9edeb; /* fumaça */
-  --surface: #f6f8f7; /* etiqueta de museu */
-  --ink: #1e2a2d; /* ferro da cobertura */
+  --paper: #eceeea;
+  --surface: #f7f8f5;
+  --ink: #1e2a2d;
   --muted: #4d5b5a;
-  --line: #c3cdca;
+  --line: #c9d1cb;
   --line-strong: #8a9996;
   --accent: #2c4c7c; /* cobalto */
   --accent-hover: #213b61;
   --accent-ink: #ffffff;
   --accent-soft: #d8e0ea;
-  --signal: #a8740f; /* lampião: só marcas, nunca texto (3,4:1) */
+  --signal: #a8740f; /* lampião: só marcas, nunca texto (>= 3:1) */
   --focus: #9a5a00;
 
   --serif: 'Old Standard TT', 'Times New Roman', serif;
@@ -33,7 +48,7 @@
   --fs-m: 1.25rem;
   --fs-l: 1.75rem;
   --fs-xl: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
-  --fs-display: clamp(2.6rem, 1.5rem + 4.4vw, 4.75rem);
+  --fs-display: clamp(2.9rem, 0.9rem + 7.2vw, 7.25rem);
 
   /* Espaçamento */
   --s1: 0.25rem;
@@ -53,12 +68,57 @@
   --width: 74rem;
   --header-h: 4rem;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --light-change: 1.4s;
 }
 
+/* Manhã: névoa azulada */
+:root[data-light='morning'] {
+  --paper: #e4eaed;
+  --surface: #f2f5f7;
+  --ink: #1d2833;
+  --muted: #4b5966;
+  --line: #c3cdd4;
+  --line-strong: #8796a2;
+  --accent: #2b4a7a;
+  --accent-hover: #203a61;
+  --accent-soft: #d3dce8;
+}
+
+/* Tarde: sombras violeta */
+:root[data-light='afternoon'] {
+  --paper: #e8e5ee;
+  --surface: #f5f3f8;
+  --ink: #241f33;
+  --muted: #575169;
+  --line: #cfcad9;
+  --line-strong: #948da6;
+  --accent: #41408f;
+  --accent-hover: #33327a;
+  --accent-soft: #dedcef;
+}
+
+/* Anoitecer: ferro escuro; os botões acendem como lampiões */
+:root[data-light='dusk'] {
+  color-scheme: dark;
+  --paper: #1f2a36;
+  --surface: #283545;
+  --ink: #eceef0;
+  --muted: #aeb7c2;
+  --line: #3a4858;
+  --line-strong: #5e6e80;
+  --accent: #e2b45e;
+  --accent-hover: #eec77e;
+  --accent-ink: #1f2a36;
+  --accent-soft: #3b3a30;
+  --signal: #e2b45e;
+  --focus: #f0b861;
+}
+
+/* ---------- Tema escuro: as mesmas luzes, à noite ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --paper: #1b2427; /* ferro à noite */
+    --paper: #1b2427;
     --surface: #233034;
     --ink: #e7ebe9;
     --muted: #a6b2af;
@@ -70,6 +130,32 @@
     --accent-soft: #2b3a4c;
     --signal: #e2b45e;
     --focus: #f0b861;
+  }
+
+  :root:not([data-theme='light'])[data-light='morning'] {
+    --paper: #19222b;
+    --surface: #212d38;
+  }
+
+  :root:not([data-theme='light'])[data-light='afternoon'] {
+    --paper: #201d2b;
+    --surface: #2a2638;
+    --muted: #b0aac2;
+    --line: #3b3650;
+    --line-strong: #635c7c;
+    --accent: #bdb8f0;
+    --accent-hover: #d2cef6;
+    --accent-ink: #1c1a29;
+    --accent-soft: #34304a;
+  }
+
+  :root:not([data-theme='light'])[data-light='dusk'] {
+    --paper: #151c24;
+    --surface: #1e2731;
+    --accent: #e2b45e;
+    --accent-hover: #eec77e;
+    --accent-ink: #151c24;
+    --accent-soft: #33302a;
   }
 }
 
@@ -87,6 +173,50 @@
   --accent-soft: #2b3a4c;
   --signal: #e2b45e;
   --focus: #f0b861;
+}
+
+:root[data-theme='dark'][data-light='morning'] {
+  --paper: #19222b;
+  --surface: #212d38;
+}
+
+:root[data-theme='dark'][data-light='afternoon'] {
+  --paper: #201d2b;
+  --surface: #2a2638;
+  --muted: #b0aac2;
+  --line: #3b3650;
+  --line-strong: #635c7c;
+  --accent: #bdb8f0;
+  --accent-hover: #d2cef6;
+  --accent-ink: #1c1a29;
+  --accent-soft: #34304a;
+}
+
+:root[data-theme='dark'][data-light='dusk'] {
+  --paper: #151c24;
+  --surface: #1e2731;
+  --accent: #e2b45e;
+  --accent-hover: #eec77e;
+  --accent-ink: #151c24;
+  --accent-soft: #33302a;
+}
+
+/* A troca de luz: interpolação lenta das cores registradas acima. */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    transition:
+      --paper var(--light-change) ease,
+      --surface var(--light-change) ease,
+      --ink var(--light-change) ease,
+      --muted var(--light-change) ease,
+      --line var(--light-change) ease,
+      --line-strong var(--light-change) ease,
+      --accent var(--light-change) ease,
+      --accent-hover var(--light-change) ease,
+      --accent-ink var(--light-change) ease,
+      --accent-soft var(--light-change) ease,
+      --signal var(--light-change) ease;
+  }
 }
 
 @media (min-width: 40rem) {
@@ -169,7 +299,8 @@ a {
   color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  transition: color 120ms ease, text-decoration-thickness 120ms ease;
+  /* Cores nunca têm transição própria: só o :root anima as cores (troca de luz). */
+  transition: text-decoration-thickness 160ms ease;
 }
 
 a:hover {
@@ -250,11 +381,27 @@ a:hover {
   font-weight: 650;
   text-decoration: none;
   cursor: pointer;
-  transition:
-    background-color 140ms ease,
-    border-color 140ms ease,
-    color 140ms ease,
-    transform 80ms ease;
+  position: relative;
+  isolation: isolate;
+  transition: transform 80ms ease;
+}
+
+/* Hover suave sem animar cor: uma película da cor do texto ganha opacidade. */
+.button::after,
+.icon-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.button:hover::after,
+.icon-button:hover::after {
+  opacity: 0.1;
 }
 
 .button:hover {
@@ -271,7 +418,6 @@ a:hover {
 }
 
 .button-primary:hover {
-  background: var(--accent-hover);
   color: var(--accent-ink);
 }
 
@@ -282,7 +428,6 @@ a:hover {
 }
 
 .button-secondary:hover {
-  background: var(--surface);
   color: var(--ink);
 }
 
@@ -298,11 +443,10 @@ a:hover {
   color: var(--ink);
   font-size: 1.125rem;
   cursor: pointer;
-  transition: background-color 140ms ease;
+  position: relative;
 }
 
 .icon-button:hover {
-  background: var(--accent-soft);
   color: var(--ink);
 }
 
@@ -495,41 +639,62 @@ a:hover {
 }
 
 /* =========================================================================
-   Hero: nome + obra com legenda de museu
+   Hero: composição tipográfica na luz da manhã
    ========================================================================= */
 .hero {
-  padding-block: var(--s7) var(--s8);
-}
-
-.hero-grid {
-  display: grid;
-  gap: var(--s7);
-  align-items: center;
-}
-
-@media (min-width: 60rem) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    gap: var(--s8);
-    padding-top: var(--s5);
-  }
+  padding-block: var(--s8) var(--s8);
 }
 
 .hero h1 {
+  max-width: 15ch;
   font-size: var(--fs-display);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+}
+
+.hero-columns {
+  display: grid;
+  gap: var(--s5);
+  margin-top: var(--s7);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--line-strong);
+}
+
+@media (min-width: 52rem) {
+  .hero-columns {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: var(--s7);
+  }
+}
+
+/* Marca curta em amarelo-lampião sobre o fio: o único acento do hero. */
+.hero-position {
+  position: relative;
+}
+
+.hero-position::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--s5) - 2px);
+  left: 0;
+  width: 4rem;
+  height: 3px;
+  background: var(--signal);
 }
 
 .hero-role {
-  margin-top: var(--s5);
   font-size: var(--fs-m);
   font-weight: 650;
+  line-height: 1.35;
+}
+
+.hero-location {
+  margin-top: var(--s2);
+  font-size: var(--fs-s);
 }
 
 .hero-intro {
-  max-width: 34rem;
-  margin-top: var(--s3);
-  color: var(--muted);
+  max-width: 38rem;
   font-size: 1.125rem;
   text-wrap: pretty;
 }
@@ -538,14 +703,14 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s3);
-  margin-top: var(--s6);
+  margin-top: var(--s5);
 }
 
 .hero-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0 var(--s5);
-  margin-top: var(--s4);
+  margin-top: var(--s3);
 }
 
 .hero-links a {
@@ -560,42 +725,6 @@ a:hover {
 
 .hero-links a:hover {
   color: var(--accent);
-}
-
-.hero-art {
-  margin: 0;
-}
-
-.hero-art-frame {
-  overflow: hidden;
-  background: var(--ink);
-}
-
-.hero-art img {
-  width: 100%;
-}
-
-/* Legenda no padrão de museu: título em itálico, autoria, acervo. */
-.hero-art figcaption {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--s2);
-  margin-top: var(--s3);
-  padding-left: var(--s3);
-  border-left: 3px solid var(--signal);
-  color: var(--muted);
-  font-size: var(--fs-s);
-  line-height: 1.5;
-}
-
-.hero-art figcaption cite {
-  flex-basis: 100%;
-  color: var(--ink);
-  font-size: 1.0625rem;
-}
-
-.hero-art figcaption a {
-  color: var(--muted);
 }
 
 /* =========================================================================
@@ -779,7 +908,6 @@ a:hover {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
-  transition: border-color 160ms ease;
 }
 
 .project:hover {
@@ -1100,33 +1228,35 @@ a:hover {
 }
 
 /* =========================================================================
-   Movimento: um único momento. A pintura entra fora de foco e se resolve,
-   como uma impressão que vira imagem.
+   Movimento: além da troca de luz, um único momento. Na carga, o nome
+   entra fora de foco e se resolve, como uma impressão que vira imagem.
    ========================================================================= */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 
-  .hero-art img {
-    animation: impression 1400ms var(--ease) both;
+  .hero h1 {
+    animation: impression 1300ms var(--ease) both;
   }
 
-  .hero-art figcaption {
-    animation: fade 600ms ease 900ms both;
+  .hero-columns {
+    animation: fade 700ms ease 650ms both;
   }
 }
 
 @keyframes impression {
   from {
-    filter: blur(14px) saturate(0.6);
-    transform: scale(1.04);
+    filter: blur(12px);
+    opacity: 0.35;
+    letter-spacing: 0.02em;
   }
 }
 
 @keyframes fade {
   from {
     opacity: 0;
+    transform: translateY(6px);
   }
 }
 

@@ -5,6 +5,7 @@ import {
   DestroyRef,
   afterNextRender,
   computed,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -13,7 +14,6 @@ import {
   CV_FILES,
   EDUCATION,
   EXPERIENCE,
-  HERO_ART,
   LANGS,
   PROFILE,
   PROJECTS,
@@ -25,10 +25,26 @@ import {
 } from './content';
 import { Icon } from './icon';
 import { LanguageService } from './language.service';
-import { scrollToSection } from './scroll';
+import { matchMediaQuery, scrollToSection } from './scroll';
 import { SiteHeader } from './site-header';
 
 const SECTION_IDS = ['top', 'about', 'experience', 'projects', 'skills', 'education', 'contact'];
+
+/**
+ * "Luz" de cada trecho da página, como nas séries de Monet (o mesmo motivo
+ * de manhã, de dia, à tarde e ao anoitecer). O CSS troca as cores com uma
+ * transição suave quando a luz muda.
+ */
+type Light = 'morning' | 'day' | 'afternoon' | 'dusk';
+const SECTION_LIGHT: Record<string, Light> = {
+  top: 'morning',
+  about: 'morning',
+  experience: 'day',
+  projects: 'day',
+  skills: 'afternoon',
+  education: 'afternoon',
+  contact: 'dusk',
+};
 
 @Component({
   selector: 'app-root',
@@ -44,7 +60,6 @@ export class App {
   protected readonly t = this.language.content;
 
   protected readonly profile = PROFILE;
-  protected readonly art = HERO_ART;
   protected readonly projects = PROJECTS;
   protected readonly experience = EXPERIENCE;
   protected readonly education = EDUCATION;
@@ -83,6 +98,18 @@ export class App {
 
   constructor() {
     const destroyRef = inject(DestroyRef);
+
+    // Quem pede menos movimento fica com uma luz fixa (sem trocas de cor).
+    const reduceMotion = matchMediaQuery(this.document, '(prefers-reduced-motion: reduce)')?.matches;
+    effect(() => {
+      const root = this.document.documentElement;
+      if (reduceMotion) {
+        delete root.dataset['light'];
+      } else {
+        root.dataset['light'] = SECTION_LIGHT[this.activeSection()] ?? 'morning';
+      }
+    });
+
     afterNextRender(() => {
       const view = this.document.defaultView;
       if (!view || !('IntersectionObserver' in view)) return;
@@ -99,7 +126,21 @@ export class App {
         const section = this.document.getElementById(id);
         if (section) observer.observe(section);
       }
-      destroyRef.onDestroy(() => observer.disconnect());
+
+      // A última seção é curta e pode nunca chegar ao meio da tela:
+      // no fim da página, ela é a ativa.
+      const onScroll = () => {
+        const root = this.document.documentElement;
+        if (view.innerHeight + view.scrollY >= root.scrollHeight - 4) {
+          this.activeSection.set(SECTION_IDS[SECTION_IDS.length - 1]);
+        }
+      };
+      view.addEventListener('scroll', onScroll, { passive: true });
+
+      destroyRef.onDestroy(() => {
+        observer.disconnect();
+        view.removeEventListener('scroll', onScroll);
+      });
     });
   }
 

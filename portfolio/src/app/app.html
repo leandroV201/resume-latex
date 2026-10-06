@@ -3,85 +3,68 @@
 <app-site-header [active]="activeSection()" />
 
 <main id="main" tabindex="-1">
-  <!-- Identidade + posicionamento + obra -->
+  <!-- Identidade + posicionamento: composição só tipográfica, na "luz da manhã" -->
   <section id="top" class="hero" tabindex="-1" aria-labelledby="hero-name">
-    <div class="container hero-grid">
-      <div class="hero-main">
-        <h1 id="hero-name">{{ profile.name }}</h1>
-        <p class="hero-role">{{ t().hero.role }}</p>
-        <p class="hero-intro">{{ t().hero.intro }}</p>
+    <div class="container">
+      <h1 id="hero-name">{{ profile.name }}</h1>
 
-        <div class="hero-actions">
-          <a class="button button-primary" href="#projects" (click)="goTo($event, 'projects')">
-            {{ t().hero.ctaProjects }}
-            <app-icon name="arrowDown" />
-          </a>
-          <a
-            class="button button-secondary"
-            [href]="cv().current.href"
-            [attr.hreflang]="cv().current.lang"
-            type="application/pdf"
-            download
-          >
-            <app-icon name="download" />
-            {{ t().hero.ctaCv }}
-          </a>
+      <div class="hero-columns">
+        <div class="hero-position">
+          <p class="hero-role">{{ t().hero.role }}</p>
+          <p class="hero-location with-icon muted"><app-icon name="mapPin" />{{ t().hero.location }}</p>
         </div>
 
-        <ul class="hero-links">
-          <li>
+        <div class="hero-body">
+          <p class="hero-intro">{{ t().hero.intro }}</p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects" (click)="goTo($event, 'projects')">
+              {{ t().hero.ctaProjects }}
+              <app-icon name="arrowDown" />
+            </a>
             <a
-              [href]="cv().other.href"
-              [attr.hreflang]="cv().other.lang"
+              class="button button-secondary"
+              [href]="cv().current.href"
+              [attr.hreflang]="cv().current.lang"
               type="application/pdf"
-              target="_blank"
-              rel="noopener"
+              download
             >
-              <app-icon name="fileText" />
-              {{ t().hero.cvOther }}
-              <span class="visually-hidden">{{ t().newTab }}</span>
+              <app-icon name="download" />
+              {{ t().hero.ctaCv }}
             </a>
-          </li>
-          <li>
-            <a [href]="profile.github" target="_blank" rel="me noopener">
-              <app-icon name="github" />
-              GitHub
-              <span class="visually-hidden">{{ t().newTab }}</span>
-            </a>
-          </li>
-          <li>
-            <a [href]="profile.linkedin" target="_blank" rel="me noopener">
-              <app-icon name="linkedin" />
-              LinkedIn
-              <span class="visually-hidden">{{ t().newTab }}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+          </div>
 
-      <!-- Monet, Gare Saint-Lazare: infraestrutura da época, pintada como impressão. -->
-      <figure class="hero-art">
-        <div class="hero-art-frame">
-          <img
-            [src]="art.src"
-            [attr.srcset]="art.srcset"
-            sizes="(min-width: 60rem) 48vw, calc(100vw - 32px)"
-            [width]="art.width"
-            [height]="art.height"
-            [alt]="t().hero.art.alt"
-            fetchpriority="high"
-            decoding="async"
-          />
+          <ul class="hero-links">
+            <li>
+              <a
+                [href]="cv().other.href"
+                [attr.hreflang]="cv().other.lang"
+                type="application/pdf"
+                target="_blank"
+                rel="noopener"
+              >
+                <app-icon name="fileText" />
+                {{ t().hero.cvOther }}
+                <span class="visually-hidden">{{ t().newTab }}</span>
+              </a>
+            </li>
+            <li>
+              <a [href]="profile.github" target="_blank" rel="me noopener">
+                <app-icon name="github" />
+                GitHub
+                <span class="visually-hidden">{{ t().newTab }}</span>
+              </a>
+            </li>
+            <li>
+              <a [href]="profile.linkedin" target="_blank" rel="me noopener">
+                <app-icon name="linkedin" />
+                LinkedIn
+                <span class="visually-hidden">{{ t().newTab }}</span>
+              </a>
+            </li>
+          </ul>
         </div>
-        <figcaption>
-          <cite>{{ t().hero.art.title }}</cite>
-          <span>{{ t().hero.art.details }}</span>
-          <a [href]="art.sourceUrl" target="_blank" rel="noopener">
-            {{ t().hero.art.source }}
-            <span class="visually-hidden">{{ t().newTab }}</span>
-          </a>
-        </figcaption>
-      </figure>
+      </div>
     </div>
   </section>
 

@@ -88,6 +88,11 @@ describe('App', () => {
     expect(button.getAttribute('aria-expanded')).toBe('false');
   });
 
+  it('começa na luz da manhã (séries de Monet)', async () => {
+    await render();
+    expect(document.documentElement.dataset['light']).toBe('morning');
+  });
+
   it('links só com ícone têm nome acessível e ícones ficam ocultos de leitores de tela', async () => {
     const { page } = await render();
 

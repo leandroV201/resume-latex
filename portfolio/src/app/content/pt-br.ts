@@ -35,12 +35,6 @@ export const PT_BR: Content = {
     ctaProjects: 'Ver projetos',
     ctaCv: 'Baixar CV (PT-BR)',
     cvOther: 'CV em inglês (PDF)',
-    art: {
-      alt: 'Pintura de uma estação de trem coberta. À direita, uma locomotiva solta uma grande nuvem de fumaça branca que enche a estação; pessoas se aglomeram dos dois lados dos trilhos. Predominam tons de azul, verde e cinza.',
-      title: 'Chegada do trem da Normandia, Gare Saint-Lazare',
-      details: 'Claude Monet, 1877. Óleo sobre tela.',
-      source: 'Art Institute of Chicago, domínio público.',
-    },
   },
 
   about: {

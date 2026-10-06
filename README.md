@@ -62,8 +62,7 @@ Configuração única no GitHub: *Settings → Pages → Build and deployment �
 
 ## Créditos do portfolio
 
-- Pintura do hero: Claude Monet, *Arrival of the Normandy Train, Gare Saint-Lazare* (1877),
-  [Art Institute of Chicago](https://www.artic.edu/artworks/16571), domínio público (imagem CC0).
-  Arquivos em `portfolio/public/art/`; o favicon é um recorte da mesma obra.
+- Direção visual inspirada nas séries de Claude Monet (o mesmo motivo pintado em luzes
+  diferentes ao longo do dia): a página muda de luz conforme a rolagem. Nenhuma imagem de obra é usada.
 - Fontes: Old Standard TT e Atkinson Hyperlegible Next (SIL Open Font License), via Fontsource.
 - Ícones: [Tabler Icons](https://tabler.io/icons) (MIT), paths embutidos em `portfolio/src/app/icon.ts`.

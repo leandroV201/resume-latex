@@ -35,12 +35,6 @@ export const EN: Content = {
     ctaProjects: 'See projects',
     ctaCv: 'Download resume (English)',
     cvOther: 'Resume in Portuguese (PDF)',
-    art: {
-      alt: 'Loosely painted image of an open-air train station. On the right, a parked train gives off an enormous plume of white smoke that fills the station; a crowd gathers on both sides of the tracks. Blue, green, and gray tones dominate.',
-      title: 'Arrival of the Normandy Train, Gare Saint-Lazare',
-      details: 'Claude Monet, 1877. Oil on canvas.',
-      source: 'Art Institute of Chicago, public domain.',
-    },
   },
 
   about: {

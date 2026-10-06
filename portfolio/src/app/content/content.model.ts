@@ -67,13 +67,6 @@ export interface Content {
     ctaCv: string;
     /** Link para o CV no outro idioma. */
     cvOther: string;
-    /** Pintura do hero (domínio público) e sua legenda de museu. */
-    art: {
-      alt: string;
-      title: string;
-      details: string;
-      source: string;
-    };
   };
 
   about: {
