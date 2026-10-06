@@ -7,31 +7,43 @@ import { LanguageService } from './language.service';
 describe('App', () => {
   beforeEach(async () => {
     localStorage.clear();
+    delete document.documentElement.dataset['theme'];
     history.replaceState(null, '', '/');
     await TestBed.configureTestingModule({ imports: [App] }).compileComponents();
   });
 
-  it('renderiza nome, seções e links dos dois CVs', async () => {
+  async function render() {
     const fixture = TestBed.createComponent(App);
+    TestBed.inject(LanguageService).set('pt-BR');
     await fixture.whenStable();
-    const page = fixture.nativeElement as HTMLElement;
+    return { fixture, page: fixture.nativeElement as HTMLElement };
+  }
+
+  it('renderiza nome, seções e os dois CVs', async () => {
+    const { page } = await render();
 
     expect(page.querySelector('h1')?.textContent).toContain('Leandro Victtorio Costa Campelo');
-    for (const id of ['about', 'projects', 'experience', 'skills', 'education', 'contact']) {
+    for (const id of ['top', 'about', 'experience', 'projects', 'skills', 'education', 'contact']) {
       expect(page.querySelector(`#${id}`)).not.toBeNull();
     }
-    const hrefs = [...page.querySelectorAll<HTMLAnchorElement>('.actions a')].map((a) =>
+    const cvLinks = [...page.querySelectorAll<HTMLAnchorElement>('.cv-row a')].map((a) =>
       a.getAttribute('href'),
     );
-    expect(hrefs).toEqual(expect.arrayContaining([CV_FILES['pt-BR'], CV_FILES.en]));
+    expect(cvLinks).toEqual(expect.arrayContaining([CV_FILES['pt-BR'], CV_FILES.en]));
+  });
+
+  it('hero leva aos projetos e baixa o CV do idioma da página', async () => {
+    const { page } = await render();
+    const [projects, cv] = page.querySelectorAll<HTMLAnchorElement>('.hero-actions a');
+
+    expect(projects.getAttribute('href')).toBe('#projects');
+    expect(cv.getAttribute('href')).toBe(CV_FILES['pt-BR']);
+    expect(cv.hasAttribute('download')).toBe(true);
+    expect(cv.textContent).toContain('PT-BR');
   });
 
   it('troca o idioma da página pelo seletor', async () => {
-    const fixture = TestBed.createComponent(App);
-    const language = TestBed.inject(LanguageService);
-    language.set('pt-BR');
-    await fixture.whenStable();
-    const page = fixture.nativeElement as HTMLElement;
+    const { fixture, page } = await render();
 
     const enButton = [...page.querySelectorAll<HTMLButtonElement>('.lang-switch button')].find(
       (b) => b.getAttribute('lang') === 'en',
@@ -43,7 +55,48 @@ describe('App', () => {
     expect(page.querySelector('#projects-title')?.textContent).toBe(CONTENT.en.projects.title);
     expect(enButton.getAttribute('aria-pressed')).toBe('true');
     expect(new URL(location.href).searchParams.get('lang')).toBe('en');
-    expect(page.querySelector('.actions a')?.getAttribute('href')).toBe(CV_FILES.en);
+    expect(page.querySelector('.hero-actions a[download]')?.getAttribute('href')).toBe(CV_FILES.en);
+  });
+
+  it('alterna o tema e lembra a escolha', async () => {
+    const { fixture, page } = await render();
+    const before = document.documentElement.dataset['theme'];
+    const toggle = page.querySelector<HTMLButtonElement>('.header-tools .icon-button:not(.menu-button)')!;
+
+    toggle.click();
+    await fixture.whenStable();
+
+    const after = document.documentElement.dataset['theme'];
+    expect(after).toMatch(/^(light|dark)$/);
+    expect(after).not.toBe(before);
+    expect(localStorage.getItem('theme')).toBe(after);
+  });
+
+  it('abre e fecha o menu mobile com aria-expanded', async () => {
+    const { fixture, page } = await render();
+    const button = page.querySelector<HTMLButtonElement>('.menu-button')!;
+    const nav = page.querySelector('#site-nav')!;
+
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+    button.click();
+    await fixture.whenStable();
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    expect(nav.classList).toContain('is-open');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await fixture.whenStable();
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('links só com ícone têm nome acessível e ícones ficam ocultos de leitores de tela', async () => {
+    const { page } = await render();
+
+    for (const link of page.querySelectorAll('a.icon-button, button.icon-button')) {
+      expect(link.getAttribute('aria-label')).toBeTruthy();
+    }
+    for (const icon of page.querySelectorAll('app-icon')) {
+      expect(icon.getAttribute('aria-hidden')).toBe('true');
+    }
   });
 });
 

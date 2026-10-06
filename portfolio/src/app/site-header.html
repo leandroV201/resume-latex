@@ -1,0 +1,67 @@
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="brand" href="#top" (click)="go($event, 'top')">
+      <span class="brand-mark" aria-hidden="true">LC</span>
+      <span>Leandro Campelo</span>
+    </a>
+
+    <nav
+      id="site-nav"
+      class="site-nav"
+      [class.is-open]="menuOpen()"
+      [attr.aria-label]="t().nav.label"
+    >
+      <ul>
+        @for (section of sections(); track section.id) {
+          <li>
+            <a
+              [href]="'#' + section.id"
+              [class.is-active]="active() === section.id"
+              [attr.aria-current]="active() === section.id ? 'true' : null"
+              (click)="go($event, section.id)"
+              >{{ section.label }}</a
+            >
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="lang-switch" role="group" [attr.aria-label]="t().langSwitch.label">
+        @for (option of langs; track option.code) {
+          <button
+            type="button"
+            [attr.lang]="option.code"
+            [attr.aria-pressed]="lang() === option.code"
+            [attr.aria-label]="option.name"
+            (click)="setLang(option.code)"
+          >
+            {{ option.short }}
+          </button>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="icon-button"
+        [attr.aria-label]="theme() === 'dark' ? t().theme.toLight : t().theme.toDark"
+        [attr.title]="theme() === 'dark' ? t().theme.toLight : t().theme.toDark"
+        (click)="toggleTheme()"
+      >
+        <app-icon [name]="theme() === 'dark' ? 'sun' : 'moon'" />
+      </button>
+
+      <button
+        #menuButton
+        type="button"
+        class="icon-button menu-button"
+        aria-controls="site-nav"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="menuOpen() ? t().nav.closeMenu : t().nav.openMenu"
+        (click)="toggleMenu()"
+      >
+        <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
+      </button>
+    </div>
+  </div>
+</header>

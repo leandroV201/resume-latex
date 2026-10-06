@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, DOCUMENT, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  DestroyRef,
+  afterNextRender,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 
 import {
   CV_FILES,
@@ -13,15 +22,16 @@ import {
   type Period,
   type YearMonth,
 } from './content';
+import { Icon } from './icon';
 import { LanguageService } from './language.service';
+import { scrollToSection } from './scroll';
+import { SiteHeader } from './site-header';
 
-const LANG_LABELS: Record<Lang, { short: string; name: string }> = {
-  'pt-BR': { short: 'PT-BR', name: 'Português' },
-  en: { short: 'EN', name: 'English' },
-};
+const SECTION_IDS = ['top', 'about', 'experience', 'projects', 'skills', 'education', 'contact'];
 
 @Component({
   selector: 'app-root',
+  imports: [Icon, SiteHeader],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -37,21 +47,62 @@ export class App {
   protected readonly experience = EXPERIENCE;
   protected readonly education = EDUCATION;
   protected readonly skillGroups = SKILL_GROUP_IDS.map((id) => ({ id, items: SKILLS[id] }));
-  protected readonly langs = LANGS.map((code) => ({ code, ...LANG_LABELS[code] }));
   protected readonly year = new Date().getFullYear();
 
-  /** O CV do idioma ativo vem primeiro; o outro fica como alternativa. */
-  protected readonly cvLinks = computed(() => {
-    const t = this.t().hero;
-    const other: Lang = this.lang() === 'pt-BR' ? 'en' : 'pt-BR';
+  /** Seção visível no meio da tela, para marcar o item ativo da navegação. */
+  protected readonly activeSection = signal('top');
+
+  /** CV no idioma da página e no outro idioma. */
+  protected readonly cv = computed(() => {
+    const current = this.lang();
+    const other: Lang = current === 'pt-BR' ? 'en' : 'pt-BR';
+    return {
+      current: { href: CV_FILES[current], lang: current },
+      other: { href: CV_FILES[other], lang: other },
+      all: LANGS.map((code) => ({ code, href: CV_FILES[code], label: this.t().contact.cvLangs[code] })),
+    };
+  });
+
+  /** Ficha do hero: fatos atuais, montados a partir de facts.ts + textos do idioma. */
+  protected readonly record = computed(() => {
+    const r = this.t().hero.record;
+    const job = EXPERIENCE[0];
+    const project = PROJECTS[0];
     return [
-      { href: CV_FILES[this.lang()], label: t.cvPrimary, hreflang: this.lang(), primary: true },
-      { href: CV_FILES[other], label: t.cvSecondary, hreflang: other, primary: false },
+      { label: r.role, value: this.t().hero.role, wide: true },
+      { label: r.company, value: job.company, note: r.companyNote },
+      { label: r.since, value: this.month(job.period.start) },
+      { label: r.project, value: project.name },
+      { label: r.stack, value: project.stack.join(', ') },
+      { label: r.base, value: this.t().hero.location },
+      { label: r.education, value: r.educationValue },
     ];
   });
 
-  protected setLang(lang: Lang): void {
-    this.language.set(lang);
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const view = this.document.defaultView;
+      if (!view || !('IntersectionObserver' in view)) return;
+      // A faixa do meio da tela decide qual seção está "ativa".
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) this.activeSection.set(entry.target.id);
+          }
+        },
+        { rootMargin: '-45% 0px -50% 0px' },
+      );
+      for (const id of SECTION_IDS) {
+        const section = this.document.getElementById(id);
+        if (section) observer.observe(section);
+      }
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
+  }
+
+  protected goTo(event: Event, id: string): void {
+    scrollToSection(this.document, event, id);
   }
 
   protected term(item: string): string {
@@ -65,19 +116,6 @@ export class App {
         ? this.t().inProgress
         : this.t().present;
     return `${this.month(period.start)} – ${end}`;
-  }
-
-  /**
-   * Rola até a seção sem trocar a URL: com base href (GitHub Pages), um
-   * href="#id" relativo recarregaria a página e perderia o ?lang.
-   */
-  protected goTo(event: Event, id: string): void {
-    const target = this.document.getElementById(id);
-    if (!target) return;
-    event.preventDefault();
-    const reduceMotion = this.document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-    target.focus({ preventScroll: true });
   }
 
   private month({ year, month }: YearMonth): string {

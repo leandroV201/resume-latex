@@ -25,6 +25,7 @@
               }
             ],
             "styles": [
+              "@fontsource-variable/atkinson-hyperlegible-next/wght.css",
               "src/styles.css"
             ]
           },

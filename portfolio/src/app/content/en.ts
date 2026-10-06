@@ -3,21 +3,26 @@ import { TECNOVA3_RESULT_URL } from './facts';
 
 export const EN: Content = {
   meta: {
-    title: 'Leandro Campelo · Mid-level Software Developer',
+    title: 'Leandro Campelo | Mid-level Software Developer',
     description:
       'Mid-level software developer working on ERP software with Java (Spring Boot), Angular, NestJS and microservices. Projects, experience and resume.',
   },
   skipLink: 'Skip to content',
+  newTab: '(opens in a new tab)',
   nav: {
     label: 'Sections',
+    home: 'Home',
     about: 'About',
-    projects: 'Projects',
     experience: 'Experience',
+    projects: 'Projects',
     skills: 'Skills',
     education: 'Education',
     contact: 'Contact',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
   },
   langSwitch: { label: 'Language' },
+  theme: { toDark: 'Switch to dark theme', toLight: 'Switch to light theme' },
   months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   present: 'Present',
   inProgress: 'in progress',
@@ -25,67 +30,37 @@ export const EN: Content = {
   hero: {
     role: 'Mid-level Software Developer',
     location: 'Teresina, Brazil',
-    paragraphs: [
-      "I work at NextCompany, an ERP vendor serving businesses across several industries. I currently build modules for wCompany 3G, the next generation of the company's ERP, using Java (Spring Boot), Angular and a microservices architecture.",
-      'Because the ERP serves very different businesses, the work covers a wide range of business rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding.',
-      'Before that, I built Flutter apps for healthcare and inclusion. I am currently pursuing a postgraduate degree in Artificial Intelligence.',
-    ],
-    cvPrimary: 'Resume in English',
-    cvSecondary: 'Resume in Portuguese',
-    pdf: 'PDF',
+    intro:
+      'I build modules for the wCompany 3G ERP at NextCompany with Java (Spring Boot) and Angular. My work covers Brazilian tax rules, data migrations, and integrations; before that, I built Flutter apps for healthcare and inclusion.',
+    ctaProjects: 'See projects',
+    ctaCv: 'Download resume (English)',
+    cvOther: 'Resume in Portuguese (PDF)',
+    record: {
+      label: 'Profile summary',
+      role: 'Role',
+      company: 'Company',
+      companyNote: 'ERP for several industries',
+      since: 'Since',
+      project: 'Current project',
+      stack: 'Project stack',
+      base: 'Based in',
+      education: 'Education',
+      educationValue: 'Associate degree in Systems Analysis; AI postgrad in progress',
+    },
   },
 
-  projects: {
-    title: 'Projects',
-    intro: 'The context behind each project and what I did on it, in more detail than a resume allows.',
-    stackLabel: 'Tech',
-    items: {
-      wcompany: {
-        role: 'NextCompany · Developer',
-        status: 'Ongoing',
-        summary:
-          "The next generation of NextCompany's ERP, built on microservices: each business routine runs as an independent service.",
-        bullets: [
-          'I have delivered 3 modules so far, with Java (Spring Boot) on the backend and Angular on the frontend. The system covers banking, sales, purchasing, cash management, freight, field sales, and parenteral nutrition bag compounding.',
-          'Proprietary code, so there is no public repository.',
-        ],
-        note: {
-          text: 'The project was selected for the TECNOVA 3 Piauí innovation grant program (FAPEPI/MCTI/FINEP).',
-          label: 'See the official list (in Portuguese)',
-          href: TECNOVA3_RESULT_URL,
-        },
-      },
-      appraxi: {
-        role: 'Comunicare Solutions · Mobile and Backend Developer',
-        summary:
-          'An app that supports therapy for people with speech apraxia, an acquired neurological disorder that affects speech production.',
-        bullets: [
-          'Developed the cross-platform Flutter app (about 8 screens) with attention to accessibility and usability. Its features were validated by 2 speech therapists.',
-          "Implemented Python backend services for the app's data integration and processing.",
-          'Integrated Kaldi speech recognition models on Linux (Ubuntu) and generated spectrograms to support voice analysis with speech therapists.',
-        ],
-        note: {
-          text: 'After my time at the company, Appraxi was selected for the TECNOVA 3 Piauí innovation grant program (FAPEPI/MCTI/FINEP).',
-          label: 'See the official list (in Portuguese)',
-          href: TECNOVA3_RESULT_URL,
-        },
-        linkLabel: 'Appraxi website',
-      },
-      expressa: {
-        role: 'Mobile Developer and Technical Lead',
-        summary:
-          'An Android app for including children with special needs, with interactions designed for autistic children.',
-        bullets: [
-          "Led the Flutter development in a 5-person team and organized the team's backlog, tasks, and deliveries using Agile practices.",
-          "Validated the app's usability and therapeutic fit with psychologists.",
-        ],
-        linkLabel: 'Code on GitHub',
-      },
-    },
+  about: {
+    title: 'About',
+    paragraphs: [
+      'NextCompany serves very different businesses, so the work covers a wide range of rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding.',
+      'Besides the ERP modules, I delivered the customer portal for invoice payments with the Iugu API, which now handles 100% of those payments, and migrated databases for 10+ customers involving Firebird and Oracle.',
+      'Two of my projects were healthcare and inclusion apps: Appraxi, validated with speech therapists, and Expressa+, validated with psychologists. I am currently pursuing a postgraduate degree in Artificial Intelligence.',
+    ],
   },
 
   experience: {
     title: 'Experience',
+    cta: 'See projects',
     items: {
       nextcompany: {
         title: 'Mid-level Software Developer',
@@ -101,6 +76,57 @@ export const EN: Content = {
       comunicare: {
         title: 'Mobile and Backend Developer',
         bullets: ['Built Appraxi: Flutter app, Python backend, and Kaldi speech recognition.'],
+      },
+    },
+  },
+
+  projects: {
+    title: 'Projects',
+    intro: 'What each project solves and what I did on it.',
+    stackLabel: 'Tech',
+    items: {
+      wcompany: {
+        org: 'NextCompany',
+        role: 'Developer',
+        status: 'Ongoing',
+        summary:
+          "The next generation of NextCompany's ERP, built on microservices: each business routine runs as an independent service.",
+        bullets: [
+          'I have delivered 3 modules so far, with Java (Spring Boot) on the backend and Angular on the frontend.',
+          'The system covers banking, sales, purchasing, cash management, freight, field sales, and parenteral nutrition bag compounding.',
+        ],
+        privateCode: 'Proprietary code, no public repository',
+        note: {
+          text: 'Selected for the TECNOVA 3 Piauí innovation grant program (FAPEPI/MCTI/FINEP).',
+          label: 'See the official list (in Portuguese)',
+          href: TECNOVA3_RESULT_URL,
+        },
+      },
+      appraxi: {
+        org: 'Comunicare Solutions',
+        role: 'Mobile and Backend Developer',
+        summary:
+          'An app that supports therapy for people with speech apraxia, an acquired neurological disorder that affects speech production.',
+        bullets: [
+          'Developed the cross-platform Flutter app (about 8 screens), validated by 2 speech therapists.',
+          'Implemented the Python backend and integrated Kaldi speech recognition, generating spectrograms for voice analysis.',
+        ],
+        note: {
+          text: 'After my time at the company, Appraxi was selected for TECNOVA 3 Piauí.',
+          label: 'See the official list (in Portuguese)',
+          href: TECNOVA3_RESULT_URL,
+        },
+        linkLabel: 'Appraxi website',
+      },
+      expressa: {
+        role: 'Mobile Developer and Technical Lead',
+        summary:
+          'An Android app for including children with special needs, with interactions designed for autistic children.',
+        bullets: [
+          'Led the Flutter development in a 5-person team, organizing the backlog and deliveries with Agile practices.',
+          "Validated the app's usability and therapeutic fit with psychologists.",
+        ],
+        linkLabel: 'Code on GitHub',
       },
     },
   },
@@ -146,9 +172,13 @@ export const EN: Content = {
   },
 
   contact: {
-    title: 'Contact',
-    text: 'The quickest way to reach me is by email or LinkedIn.',
+    title: "Let's talk",
+    text: 'The quickest way to reach me is LinkedIn or email.',
     email: 'Email',
+    cvTitle: 'Resume (PDF)',
+    cvLangs: { 'pt-BR': 'Portuguese', en: 'English' },
+    cvDownload: 'Download',
+    cvView: 'View',
   },
 
   footer: {

@@ -3,21 +3,26 @@ import { TECNOVA3_RESULT_URL } from './facts';
 
 export const PT_BR: Content = {
   meta: {
-    title: 'Leandro Campelo · Desenvolvedor de Software Pleno',
+    title: 'Leandro Campelo | Desenvolvedor de Software Pleno',
     description:
       'Desenvolvedor de Software Pleno em ERP: Java (Spring Boot), Angular, NestJS e microsserviços. Projetos, experiência e currículo em PDF.',
   },
   skipLink: 'Pular para o conteúdo',
+  newTab: '(abre em nova aba)',
   nav: {
     label: 'Seções',
+    home: 'Início',
     about: 'Sobre',
-    projects: 'Projetos',
     experience: 'Experiência',
+    projects: 'Projetos',
     skills: 'Habilidades',
     education: 'Formação',
     contact: 'Contato',
+    openMenu: 'Abrir menu',
+    closeMenu: 'Fechar menu',
   },
   langSwitch: { label: 'Idioma' },
+  theme: { toDark: 'Usar tema escuro', toLight: 'Usar tema claro' },
   months: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
   present: 'atual',
   inProgress: 'em andamento',
@@ -25,67 +30,37 @@ export const PT_BR: Content = {
   hero: {
     role: 'Desenvolvedor de Software Pleno',
     location: 'Teresina, PI',
-    paragraphs: [
-      'Trabalho na NextCompany, empresa de ERP que atende diferentes segmentos do mercado. Hoje desenvolvo módulos do wCompany 3G, a nova geração do ERP, em Java (Spring Boot) e Angular, com arquitetura de microsserviços.',
-      'Como o ERP atende negócios bem diferentes, o trabalho passa por regras variadas: documentos fiscais (NF-e e NFC-e), tributos e SPED, rotinas bancárias e de caixa, vendas externas e até a manipulação de bolsas de nutrição parenteral.',
-      'Antes disso, desenvolvi apps em Flutter para saúde e inclusão. Estou cursando pós-graduação em Inteligência Artificial.',
-    ],
-    cvPrimary: 'Currículo em português',
-    cvSecondary: 'Currículo em inglês',
-    pdf: 'PDF',
+    intro:
+      'Desenvolvo módulos do ERP wCompany 3G em Java (Spring Boot) e Angular na NextCompany. Trabalho com regras fiscais, migração de dados e integrações, e antes criei apps em Flutter para saúde e inclusão.',
+    ctaProjects: 'Ver projetos',
+    ctaCv: 'Baixar CV (PT-BR)',
+    cvOther: 'CV em inglês (PDF)',
+    record: {
+      label: 'Resumo profissional',
+      role: 'Cargo',
+      company: 'Empresa',
+      companyNote: 'ERP para diferentes segmentos',
+      since: 'Desde',
+      project: 'Projeto atual',
+      stack: 'Stack do projeto',
+      base: 'Base',
+      education: 'Formação',
+      educationValue: 'Tecnólogo em ADS; pós em IA em andamento',
+    },
   },
 
-  projects: {
-    title: 'Projetos',
-    intro: 'O contexto de cada projeto e o que fiz nele, com mais detalhes do que cabem no currículo.',
-    stackLabel: 'Tecnologias',
-    items: {
-      wcompany: {
-        role: 'NextCompany · Desenvolvedor',
-        status: 'Em andamento',
-        summary:
-          'Nova geração do ERP da NextCompany, construída em microsserviços: cada rotina de negócio roda como um serviço independente.',
-        bullets: [
-          'Já entreguei 3 módulos, com Java (Spring Boot) no backend e Angular no frontend. O sistema cobre bancário, vendas, compras, caixa, cargas, vendas externas e manipulação de bolsas de nutrição parenteral.',
-          'Código proprietário, por isso não há repositório público.',
-        ],
-        note: {
-          text: 'O projeto foi aprovado no programa TECNOVA 3 Piauí (FAPEPI/MCTI/FINEP).',
-          label: 'Ver lista oficial de aprovados',
-          href: TECNOVA3_RESULT_URL,
-        },
-      },
-      appraxi: {
-        role: 'Comunicare Solutions · Desenvolvedor Mobile e Backend',
-        summary:
-          'App de apoio à terapia de pessoas com apraxia da fala, um distúrbio neurológico adquirido que afeta a produção da fala.',
-        bullets: [
-          'Desenvolvi o app multiplataforma em Flutter (cerca de 8 telas), com atenção a acessibilidade e usabilidade. As funcionalidades foram validadas por 2 fonoaudiólogos.',
-          'Implementei serviços de backend em Python para integração e processamento dos dados do app.',
-          'Integrei modelos de reconhecimento de voz com Kaldi em Linux (Ubuntu) e gerei espectrogramas para apoiar a análise vocal feita com fonoaudiólogos.',
-        ],
-        note: {
-          text: 'Depois do meu período na empresa, o Appraxi foi aprovado no programa TECNOVA 3 Piauí (FAPEPI/MCTI/FINEP).',
-          label: 'Ver lista oficial de aprovados',
-          href: TECNOVA3_RESULT_URL,
-        },
-        linkLabel: 'Site do Appraxi',
-      },
-      expressa: {
-        role: 'Desenvolvedor Mobile e Líder Técnico',
-        summary:
-          'App Android para inclusão de crianças com necessidades especiais, com interações pensadas para crianças no espectro autista.',
-        bullets: [
-          'Liderei o desenvolvimento em Flutter, em um time de 5 pessoas, e organizei backlog, tarefas e entregas com práticas ágeis.',
-          'Validei a usabilidade e a aderência terapêutica do app junto a psicólogos.',
-        ],
-        linkLabel: 'Código no GitHub',
-      },
-    },
+  about: {
+    title: 'Sobre',
+    paragraphs: [
+      'A NextCompany atende negócios bem diferentes, então o trabalho passa por regras variadas: documentos fiscais (NF-e e NFC-e), tributos e SPED, rotinas bancárias e de caixa, vendas externas e até a manipulação de bolsas de nutrição parenteral.',
+      'Além dos módulos do ERP, entreguei o portal do cliente para pagamento de faturas com a API da Iugu, por onde hoje passam 100% desses pagamentos, e migrei as bases de 10+ clientes envolvendo Firebird e Oracle.',
+      'Dois dos meus projetos foram apps de saúde e inclusão: o Appraxi, validado com fonoaudiólogos, e o Expressa+, validado com psicólogos. Estou cursando pós-graduação em Inteligência Artificial.',
+    ],
   },
 
   experience: {
     title: 'Experiência',
+    cta: 'Ver projetos',
     items: {
       nextcompany: {
         title: 'Desenvolvedor de Software Pleno',
@@ -103,6 +78,57 @@ export const PT_BR: Content = {
         bullets: [
           'Desenvolvimento do Appraxi: app em Flutter, backend em Python e reconhecimento de voz com Kaldi.',
         ],
+      },
+    },
+  },
+
+  projects: {
+    title: 'Projetos',
+    intro: 'O que cada projeto resolve e o que eu fiz nele.',
+    stackLabel: 'Tecnologias',
+    items: {
+      wcompany: {
+        org: 'NextCompany',
+        role: 'Desenvolvedor',
+        status: 'Em andamento',
+        summary:
+          'Nova geração do ERP da NextCompany, construída em microsserviços: cada rotina de negócio roda como um serviço independente.',
+        bullets: [
+          'Entreguei 3 módulos até agora, com Java (Spring Boot) no backend e Angular no frontend.',
+          'O sistema cobre bancário, vendas, compras, caixa, cargas, vendas externas e manipulação de bolsas de nutrição parenteral.',
+        ],
+        privateCode: 'Código proprietário, sem repositório público',
+        note: {
+          text: 'Aprovado no programa TECNOVA 3 Piauí (FAPEPI/MCTI/FINEP).',
+          label: 'Ver lista oficial',
+          href: TECNOVA3_RESULT_URL,
+        },
+      },
+      appraxi: {
+        org: 'Comunicare Solutions',
+        role: 'Desenvolvedor Mobile e Backend',
+        summary:
+          'App de apoio à terapia de pessoas com apraxia da fala, um distúrbio neurológico adquirido que afeta a produção da fala.',
+        bullets: [
+          'Desenvolvi o app multiplataforma em Flutter (cerca de 8 telas), validado por 2 fonoaudiólogos.',
+          'Implementei o backend em Python e integrei reconhecimento de voz com Kaldi, gerando espectrogramas para a análise vocal.',
+        ],
+        note: {
+          text: 'Depois do meu período na empresa, o Appraxi foi aprovado no TECNOVA 3 Piauí.',
+          label: 'Ver lista oficial',
+          href: TECNOVA3_RESULT_URL,
+        },
+        linkLabel: 'Site do Appraxi',
+      },
+      expressa: {
+        role: 'Desenvolvedor Mobile e Líder Técnico',
+        summary:
+          'App Android para inclusão de crianças com necessidades especiais, com interações pensadas para crianças no espectro autista.',
+        bullets: [
+          'Liderei o desenvolvimento em Flutter em um time de 5 pessoas, organizando backlog e entregas com práticas ágeis.',
+          'Validei a usabilidade e a aderência terapêutica do app junto a psicólogos.',
+        ],
+        linkLabel: 'Código no GitHub',
       },
     },
   },
@@ -151,13 +177,17 @@ export const PT_BR: Content = {
   },
 
   contact: {
-    title: 'Contato',
-    text: 'O jeito mais rápido de falar comigo é por e-mail ou pelo LinkedIn.',
+    title: 'Vamos conversar?',
+    text: 'O jeito mais rápido de falar comigo é pelo LinkedIn ou por e-mail.',
     email: 'E-mail',
+    cvTitle: 'Currículo em PDF',
+    cvLangs: { 'pt-BR': 'Português', en: 'Inglês' },
+    cvDownload: 'Baixar',
+    cvView: 'Visualizar',
   },
 
   footer: {
-    source: 'Este site e os PDFs do currículo são gerados a partir do mesmo repositório.',
+    source: 'O site e os PDFs do currículo são gerados a partir do mesmo repositório.',
     sourceLink: 'Ver código',
   },
 };
