@@ -1,6 +1,12 @@
 % --- PACKAGES ---
+% Mapeia glifos para Unicode: sem isso, ATS extraem "financial" como "nancial"
+% (ligaduras fi/fl) e podem perder acentos.
+\input{glyphtounicode}
+\pdfgentounicode=1
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern} % fontes vetoriais (Type 1) com acentos; evita bitmaps
+\usepackage{microtype}
 \usepackage{geometry}
 \usepackage{parskip}
 \usepackage{hyperref}
@@ -34,3 +40,6 @@
 [\vspace{0.2ex}\titlerule]
 
 \titlespacing*{\section}{0pt}{4pt}{1pt}
+
+% Empresa/instituição colada ao cargo e às datas logo abaixo
+\titlespacing*{\subsection}{0pt}{5pt}{0pt}
