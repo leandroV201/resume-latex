@@ -26,6 +26,9 @@
             ],
             "styles": [
               "@fontsource-variable/atkinson-hyperlegible-next/wght.css",
+              "@fontsource/old-standard-tt/latin-400.css",
+              "@fontsource/old-standard-tt/latin-400-italic.css",
+              "@fontsource/old-standard-tt/latin-700.css",
               "src/styles.css"
             ]
           },

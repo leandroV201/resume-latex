@@ -13,6 +13,7 @@ import {
   CV_FILES,
   EDUCATION,
   EXPERIENCE,
+  HERO_ART,
   LANGS,
   PROFILE,
   PROJECTS,
@@ -43,6 +44,7 @@ export class App {
   protected readonly t = this.language.content;
 
   protected readonly profile = PROFILE;
+  protected readonly art = HERO_ART;
   protected readonly projects = PROJECTS;
   protected readonly experience = EXPERIENCE;
   protected readonly education = EDUCATION;
@@ -63,13 +65,13 @@ export class App {
     };
   });
 
-  /** Ficha do hero: fatos atuais, montados a partir de facts.ts + textos do idioma. */
+  /** Cartel da seção Sobre: fatos atuais, montados a partir de facts.ts + textos do idioma. */
   protected readonly record = computed(() => {
-    const r = this.t().hero.record;
+    const r = this.t().about.record;
     const job = EXPERIENCE[0];
     const project = PROJECTS[0];
     return [
-      { label: r.role, value: this.t().hero.role, wide: true },
+      { label: r.role, value: this.t().hero.role },
       { label: r.company, value: job.company, note: r.companyNote },
       { label: r.since, value: this.month(job.period.start) },
       { label: r.project, value: project.name },
@@ -103,6 +105,15 @@ export class App {
 
   protected goTo(event: Event, id: string): void {
     scrollToSection(this.document, event, id);
+  }
+
+  /** "Java, Spring Boot e Angular" / "Java, Spring Boot, and Angular". */
+  protected readonly listFormat = computed(
+    () => new Intl.ListFormat(this.lang(), { style: 'long', type: 'conjunction' }),
+  );
+
+  protected list(items: readonly string[]): string {
+    return this.listFormat().format(items);
   }
 
   protected term(item: string): string {

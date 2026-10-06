@@ -35,6 +35,16 @@ export const PT_BR: Content = {
     ctaProjects: 'Ver projetos',
     ctaCv: 'Baixar CV (PT-BR)',
     cvOther: 'CV em inglês (PDF)',
+    art: {
+      alt: 'Pintura de uma estação de trem coberta. À direita, uma locomotiva solta uma grande nuvem de fumaça branca que enche a estação; pessoas se aglomeram dos dois lados dos trilhos. Predominam tons de azul, verde e cinza.',
+      title: 'Chegada do trem da Normandia, Gare Saint-Lazare',
+      details: 'Claude Monet, 1877. Óleo sobre tela.',
+      source: 'Art Institute of Chicago, domínio público.',
+    },
+  },
+
+  about: {
+    title: 'Sobre',
     record: {
       label: 'Resumo profissional',
       role: 'Cargo',
@@ -47,10 +57,6 @@ export const PT_BR: Content = {
       education: 'Formação',
       educationValue: 'Tecnólogo em ADS; pós em IA em andamento',
     },
-  },
-
-  about: {
-    title: 'Sobre',
     paragraphs: [
       'A NextCompany atende negócios bem diferentes, então o trabalho passa por regras variadas: documentos fiscais (NF-e e NFC-e), tributos e SPED, rotinas bancárias e de caixa, vendas externas e até a manipulação de bolsas de nutrição parenteral.',
       'Além dos módulos do ERP, entreguei o portal do cliente para pagamento de faturas com a API da Iugu, por onde hoje passam 100% desses pagamentos, e migrei as bases de 10+ clientes envolvendo Firebird e Oracle.',

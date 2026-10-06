@@ -3,7 +3,7 @@
 <app-site-header [active]="activeSection()" />
 
 <main id="main" tabindex="-1">
-  <!-- Identidade + posicionamento + ficha com os fatos atuais -->
+  <!-- Identidade + posicionamento + obra -->
   <section id="top" class="hero" tabindex="-1" aria-labelledby="hero-name">
     <div class="container hero-grid">
       <div class="hero-main">
@@ -59,29 +59,56 @@
         </ul>
       </div>
 
-      <dl class="record" [attr.aria-label]="t().hero.record.label">
-        @for (field of record(); track field.label; let i = $index) {
-          <div class="record-field" [class.is-wide]="field.wide" [style.--i]="i">
-            <dt>{{ field.label }}</dt>
-            <dd>
-              {{ field.value }}
-              @if (field.note) {
-                <span class="record-note">{{ field.note }}</span>
-              }
-            </dd>
-          </div>
-        }
-      </dl>
+      <!-- Monet, Gare Saint-Lazare: infraestrutura da época, pintada como impressão. -->
+      <figure class="hero-art">
+        <div class="hero-art-frame">
+          <img
+            [src]="art.src"
+            [attr.srcset]="art.srcset"
+            sizes="(min-width: 60rem) 48vw, calc(100vw - 32px)"
+            [width]="art.width"
+            [height]="art.height"
+            [alt]="t().hero.art.alt"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          <cite>{{ t().hero.art.title }}</cite>
+          <span>{{ t().hero.art.details }}</span>
+          <a [href]="art.sourceUrl" target="_blank" rel="noopener">
+            {{ t().hero.art.source }}
+            <span class="visually-hidden">{{ t().newTab }}</span>
+          </a>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
   <section id="about" class="section" tabindex="-1" aria-labelledby="about-title">
     <div class="container section-grid">
       <h2 id="about-title">{{ t().about.title }}</h2>
-      <div class="prose">
-        @for (paragraph of t().about.paragraphs; track $index) {
-          <p>{{ paragraph }}</p>
-        }
+      <div class="about-grid">
+        <div class="prose">
+          @for (paragraph of t().about.paragraphs; track $index) {
+            <p>{{ paragraph }}</p>
+          }
+        </div>
+
+        <!-- Cartel: os fatos atuais, como a etiqueta ao lado de uma obra. -->
+        <dl class="record" [attr.aria-label]="t().about.record.label">
+          @for (field of record(); track field.label) {
+            <div class="record-field">
+              <dt>{{ field.label }}</dt>
+              <dd>
+                {{ field.value }}
+                @if (field.note) {
+                  <span class="record-note">{{ field.note }}</span>
+                }
+              </dd>
+            </div>
+          }
+        </dl>
       </div>
     </div>
   </section>
@@ -125,6 +152,10 @@
         <p class="muted">{{ t().projects.intro }}</p>
       </div>
 
+      <!--
+        Cada projeto como etiqueta de museu (cartel): título da obra em itálico,
+        autoria e data, técnica (a stack) e o texto de parede.
+      -->
       <div class="project-grid">
         @for (project of projects; track project.id; let first = $first) {
           @let text = t().projects.items[project.id];
@@ -134,20 +165,24 @@
             [attr.aria-labelledby]="'project-' + project.id"
           >
             <div class="project-main">
-              <div class="project-head">
-                <h3 [id]="'project-' + project.id">{{ project.name }}</h3>
-                @if (project.period) {
-                  <p class="project-status">{{ period(project.period) }}</p>
-                } @else {
-                  <p class="project-status is-ongoing">{{ text.status }}</p>
-                }
-              </div>
-              <p class="project-role">
+              <h3 class="project-title" [id]="'project-' + project.id">{{ project.name }}</h3>
+              <p class="project-attribution">
                 @if (text.org) {
                   <strong>{{ text.org }}</strong>
                 }
                 <span>{{ text.role }}</span>
               </p>
+              <p class="project-date">
+                @if (project.period) {
+                  {{ period(project.period) }}
+                } @else {
+                  <span class="is-ongoing">{{ text.status }}</span>
+                }
+              </p>
+              <p class="project-medium">
+                <span class="visually-hidden">{{ t().projects.stackLabel }}: </span>{{ list(project.stack) }}
+              </p>
+
               <p class="project-summary">{{ text.summary }}</p>
               <ul class="bullets">
                 @for (bullet of text.bullets; track $index) {
@@ -157,12 +192,6 @@
             </div>
 
             <div class="project-meta">
-              <ul class="tags" [attr.aria-label]="t().projects.stackLabel">
-                @for (tech of project.stack; track tech) {
-                  <li>{{ tech }}</li>
-                }
-              </ul>
-
               @if (text.note; as note) {
                 <p class="project-fact">
                   <app-icon name="certified" />

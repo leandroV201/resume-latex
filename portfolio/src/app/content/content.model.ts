@@ -67,7 +67,19 @@ export interface Content {
     ctaCv: string;
     /** Link para o CV no outro idioma. */
     cvOther: string;
-    /** Ficha-resumo ao lado do nome. */
+    /** Pintura do hero (domínio público) e sua legenda de museu. */
+    art: {
+      alt: string;
+      title: string;
+      details: string;
+      source: string;
+    };
+  };
+
+  about: {
+    title: string;
+    paragraphs: readonly string[];
+    /** Cartel com os fatos atuais. */
     record: {
       label: string;
       role: string;
@@ -80,11 +92,6 @@ export interface Content {
       education: string;
       educationValue: string;
     };
-  };
-
-  about: {
-    title: string;
-    paragraphs: readonly string[];
   };
 
   experience: {

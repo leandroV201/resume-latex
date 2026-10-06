@@ -35,6 +35,16 @@ export const EN: Content = {
     ctaProjects: 'See projects',
     ctaCv: 'Download resume (English)',
     cvOther: 'Resume in Portuguese (PDF)',
+    art: {
+      alt: 'Loosely painted image of an open-air train station. On the right, a parked train gives off an enormous plume of white smoke that fills the station; a crowd gathers on both sides of the tracks. Blue, green, and gray tones dominate.',
+      title: 'Arrival of the Normandy Train, Gare Saint-Lazare',
+      details: 'Claude Monet, 1877. Oil on canvas.',
+      source: 'Art Institute of Chicago, public domain.',
+    },
+  },
+
+  about: {
+    title: 'About',
     record: {
       label: 'Profile summary',
       role: 'Role',
@@ -47,10 +57,6 @@ export const EN: Content = {
       education: 'Education',
       educationValue: 'Associate degree in Systems Analysis; AI postgrad in progress',
     },
-  },
-
-  about: {
-    title: 'About',
     paragraphs: [
       'NextCompany serves very different businesses, so the work covers a wide range of rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding.',
       'Besides the ERP modules, I delivered the customer portal for invoice payments with the Iugu API, which now handles 100% of those payments, and migrated databases for 10+ customers involving Firebird and Oracle.',

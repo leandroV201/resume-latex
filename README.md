@@ -59,3 +59,11 @@ Cada push na `main` dispara o workflow `CV e portfolio`:
 4. publica no GitHub Pages, **somente se tudo acima passar**.
 
 Configuração única no GitHub: *Settings → Pages → Build and deployment → Source: **GitHub Actions***.
+
+## Créditos do portfolio
+
+- Pintura do hero: Claude Monet, *Arrival of the Normandy Train, Gare Saint-Lazare* (1877),
+  [Art Institute of Chicago](https://www.artic.edu/artworks/16571), domínio público (imagem CC0).
+  Arquivos em `portfolio/public/art/`; o favicon é um recorte da mesma obra.
+- Fontes: Old Standard TT e Atkinson Hyperlegible Next (SIL Open Font License), via Fontsource.
+- Ícones: [Tabler Icons](https://tabler.io/icons) (MIT), paths embutidos em `portfolio/src/app/icon.ts`.
