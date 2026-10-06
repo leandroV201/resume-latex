@@ -1,0 +1,202 @@
+<a class="skip-link" href="#main" (click)="goTo($event, 'main')">{{ t().skipLink }}</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#about" (click)="goTo($event, 'about')">{{ profile.shortName }}</a>
+
+    <nav class="site-nav" [attr.aria-label]="t().nav.label">
+      <a href="#projects" (click)="goTo($event, 'projects')">{{ t().nav.projects }}</a>
+      <a href="#experience" (click)="goTo($event, 'experience')">{{ t().nav.experience }}</a>
+      <a href="#skills" (click)="goTo($event, 'skills')">{{ t().nav.skills }}</a>
+      <a href="#education" (click)="goTo($event, 'education')">{{ t().nav.education }}</a>
+      <a href="#contact" (click)="goTo($event, 'contact')">{{ t().nav.contact }}</a>
+    </nav>
+
+    <div class="lang-switch" role="group" [attr.aria-label]="t().langSwitch.label">
+      @for (option of langs; track option.code) {
+        <button
+          type="button"
+          [attr.lang]="option.code"
+          [attr.aria-pressed]="lang() === option.code"
+          [attr.aria-label]="option.name"
+          (click)="setLang(option.code)"
+        >
+          {{ option.short }}
+        </button>
+      }
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section id="about" class="hero container" tabindex="-1" aria-labelledby="about-title">
+    <p class="eyebrow">{{ t().hero.role }} · {{ t().hero.location }}</p>
+    <h1 id="about-title">{{ profile.name }}</h1>
+
+    @for (paragraph of t().hero.paragraphs; track $index) {
+      <p class="lead">{{ paragraph }}</p>
+    }
+
+    <div class="actions">
+      @for (cv of cvLinks(); track cv.href) {
+        <a
+          class="button"
+          [class.button-primary]="cv.primary"
+          [href]="cv.href"
+          [attr.hreflang]="cv.hreflang"
+          type="application/pdf"
+          target="_blank"
+          rel="noopener"
+        >
+          {{ cv.label }} <span class="muted">({{ t().hero.pdf }})</span>
+        </a>
+      }
+    </div>
+
+    <ul class="inline-links">
+      <li><a [href]="profile.github" rel="me noopener" target="_blank">GitHub</a></li>
+      <li><a [href]="profile.linkedin" rel="me noopener" target="_blank">LinkedIn</a></li>
+      <li><a [href]="'mailto:' + profile.email">{{ profile.email }}</a></li>
+    </ul>
+  </section>
+
+  <section id="projects" class="section container" tabindex="-1" aria-labelledby="projects-title">
+    <h2 id="projects-title">{{ t().projects.title }}</h2>
+    <p class="section-intro">{{ t().projects.intro }}</p>
+
+    @for (project of projects; track project.id) {
+      @let text = t().projects.items[project.id];
+      <article class="entry" [attr.aria-labelledby]="'project-' + project.id">
+        <div class="entry-head">
+          <h3 [id]="'project-' + project.id">{{ project.name }}</h3>
+          <p class="entry-date">
+            @if (project.period) {
+              {{ period(project.period) }}
+            } @else {
+              {{ text.status }}
+            }
+          </p>
+        </div>
+        <p class="entry-role">{{ text.role }}</p>
+        <p>{{ text.summary }}</p>
+        <ul class="bullets">
+          @for (bullet of text.bullets; track $index) {
+            <li>{{ bullet }}</li>
+          }
+        </ul>
+
+        @if (text.note; as note) {
+          <p class="note">
+            {{ note.text }}
+            <a [href]="note.href" target="_blank" rel="noopener" hreflang="pt-BR">{{ note.label }}</a>
+          </p>
+        }
+
+        <p class="stack">
+          <span class="visually-hidden">{{ t().projects.stackLabel }}: </span>
+          @for (tech of project.stack; track tech) {
+            <span class="tag">{{ tech }}</span>
+          }
+        </p>
+
+        @if (project.url && text.linkLabel) {
+          <p><a class="arrow-link" [href]="project.url" target="_blank" rel="noopener">{{ text.linkLabel }}</a></p>
+        }
+      </article>
+    }
+  </section>
+
+  <section id="experience" class="section container" tabindex="-1" aria-labelledby="experience-title">
+    <h2 id="experience-title">{{ t().experience.title }}</h2>
+
+    @for (job of experience; track job.id) {
+      @let text = t().experience.items[job.id];
+      <article class="entry">
+        <div class="entry-head">
+          <h3>{{ job.company }}</h3>
+          <p class="entry-date">{{ period(job.period) }}</p>
+        </div>
+        <p class="entry-role">{{ text.title }} · {{ job.location }}</p>
+        <ul class="bullets">
+          @for (bullet of text.bullets; track $index) {
+            <li>{{ bullet }}</li>
+          }
+        </ul>
+      </article>
+    }
+  </section>
+
+  <section id="skills" class="section container" tabindex="-1" aria-labelledby="skills-title">
+    <h2 id="skills-title">{{ t().skills.title }}</h2>
+
+    <dl class="skills">
+      @for (group of skillGroups; track group.id) {
+        <div class="skill-row">
+          <dt>{{ t().skills.groups[group.id] }}</dt>
+          <dd>
+            @for (item of group.items; track item; let last = $last) {
+              {{ term(item) }}@if (!last) {<span aria-hidden="true">, </span>}
+            }
+          </dd>
+        </div>
+      }
+      <div class="skill-row">
+        <dt>{{ t().skills.languagesTitle }}</dt>
+        <dd>{{ t().skills.languages.join(' · ') }}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="education" class="section container" tabindex="-1" aria-labelledby="education-title">
+    <h2 id="education-title">{{ t().education.title }}</h2>
+
+    @for (item of education; track item.id) {
+      @let text = t().education.items[item.id];
+      <article class="entry compact">
+        <div class="entry-head">
+          <h3>{{ text.course }}</h3>
+          <p class="entry-date">{{ period(item.period, item.inProgress) }}</p>
+        </div>
+        <p class="entry-role">{{ item.institution }}</p>
+        @if (text.detail) {
+          <p>{{ text.detail }}</p>
+        }
+      </article>
+    }
+
+    <h3 class="subheading">{{ t().education.coursesTitle }}</h3>
+    <ul class="bullets">
+      @for (course of t().education.courses; track course) {
+        <li>{{ course }}</li>
+      }
+    </ul>
+  </section>
+
+  <section id="contact" class="section container" tabindex="-1" aria-labelledby="contact-title">
+    <h2 id="contact-title">{{ t().contact.title }}</h2>
+    <p>{{ t().contact.text }}</p>
+    <ul class="contact-list">
+      <li>
+        <span class="contact-label">{{ t().contact.email }}</span>
+        <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+      </li>
+      <li>
+        <span class="contact-label">LinkedIn</span>
+        <a [href]="profile.linkedin" rel="me noopener" target="_blank">linkedin.com/in/leandro-campelo</a>
+      </li>
+      <li>
+        <span class="contact-label">GitHub</span>
+        <a [href]="profile.github" rel="me noopener" target="_blank">github.com/leandroV201</a>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      © {{ year }} {{ profile.name }}. {{ t().footer.source }}
+      <a [href]="profile.repository" target="_blank" rel="noopener">{{ t().footer.sourceLink }}</a>
+    </p>
+  </div>
+</footer>
