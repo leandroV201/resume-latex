@@ -1,0 +1,104 @@
+name: CV e portfolio
+
+# push na main: compila os CVs, valida os PDFs, gera o portfolio e publica no GitHub Pages.
+# pull request: faz tudo, menos publicar.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  cv:
+    name: Compilar e validar CVs (LaTeX)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Instalar TeX Live e poppler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk lmodern poppler-utils \
+            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-lang-portuguese
+
+      - name: Compilar PT-BR e EN
+        run: bash scripts/build-cv.sh
+
+      - name: Validar PDFs (estrutura, fontes, texto extraível, acentos, datas PT x EN)
+        run: python3 scripts/validate-pdfs.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: |
+            output/leandro-cv-pt-br.pdf
+            output/leandro-cv-en.pdf
+          if-no-files-found: error
+
+  portfolio:
+    name: Testar e gerar portfolio (Angular)
+    needs: cv
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: portfolio
+    env:
+      # Site de projeto: https://<usuário>.github.io/<repositório>/.
+      # Se o repositório for <usuário>.github.io, o site fica na raiz.
+      BASE_HREF: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '/' || format('/{0}/', github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: portfolio/package-lock.json
+
+      - name: Baixar PDFs validados
+        uses: actions/download-artifact@v5
+        with:
+          name: cv-pdfs
+          path: portfolio/public/cv
+
+      - run: npm ci
+
+      - name: Testes
+        run: npm run test:ci
+
+      - name: Build (base href ${{ env.BASE_HREF }})
+        run: npx ng build --base-href "$BASE_HREF"
+
+      - name: Conferir PDFs no build
+        run: |
+          test -s dist/portfolio/browser/cv/leandro-cv-pt-br.pdf
+          test -s dist/portfolio/browser/cv/leandro-cv-en.pdf
+
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        with:
+          path: portfolio/dist/portfolio/browser
+
+  deploy:
+    name: Publicar no GitHub Pages
+    needs: portfolio
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
