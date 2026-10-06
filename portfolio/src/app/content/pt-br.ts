@@ -60,7 +60,7 @@ export const PT_BR: Content = {
         summary:
           'App de apoio à terapia de pessoas com apraxia da fala, um distúrbio neurológico adquirido que afeta a produção da fala.',
         bullets: [
-          'Desenvolvi o app multiplataforma em Flutter, com atenção a acessibilidade e usabilidade, e validei as funcionalidades com profissionais de saúde.',
+          'Desenvolvi o app multiplataforma em Flutter (cerca de 8 telas), com atenção a acessibilidade e usabilidade. As funcionalidades foram validadas por 2 fonoaudiólogos.',
           'Implementei serviços de backend em Python para integração e processamento dos dados do app.',
           'Integrei modelos de reconhecimento de voz com Kaldi em Linux (Ubuntu) e gerei espectrogramas para apoiar a análise vocal feita com fonoaudiólogos.',
         ],
@@ -76,7 +76,7 @@ export const PT_BR: Content = {
         summary:
           'App Android para inclusão de crianças com necessidades especiais, com interações pensadas para crianças no espectro autista.',
         bullets: [
-          'Liderei o desenvolvimento em Flutter e organizei backlog, tarefas e entregas do time com práticas ágeis.',
+          'Liderei o desenvolvimento em Flutter, em um time de 5 pessoas, e organizei backlog, tarefas e entregas com práticas ágeis.',
           'Validei a usabilidade e a aderência terapêutica do app junto a psicólogos.',
         ],
         linkLabel: 'Código no GitHub',
@@ -92,8 +92,8 @@ export const PT_BR: Content = {
         bullets: [
           'wCompany 3G: 3 módulos entregues em Java (Spring Boot) e Angular, em arquitetura de microsserviços.',
           'Fiscal: manutenção, junto com o time, dos módulos de NF-e e NFC-e (incluindo regras de cálculo de tributos) e suporte às obrigações acessórias (SPED).',
-          'Migração de bases de clientes envolvendo Firebird (diversas versões) e Oracle (18 e 21); cada cliente tem sua própria base em servidor dedicado.',
-          'Portal do cliente para pagamento de faturas, integrado à API de pagamentos da Iugu.',
+          'Migração das bases de 10+ clientes envolvendo Firebird (diversas versões) e Oracle (18 e 21); cada cliente tem sua própria base em servidor dedicado.',
+          'Portal do cliente para pagamento de faturas, integrado à API da Iugu: 100% dos pagamentos passam por ele, gerados pelo financeiro ou pelo próprio cliente.',
           'wCRM, o CRM em nuvem da empresa: backend em NestJS com SOLID e Clean Architecture, Kafka, Redis e Docker; frontend em React e TypeScript; relatórios em PostgreSQL (Prisma ORM) e dados fiscais em MongoDB.',
           'Time de 20 pessoas (5 desenvolvedores) com Scrum e Kanban; Docker e Kubernetes nos ambientes da empresa e Qlik para análise de dados.',
         ],

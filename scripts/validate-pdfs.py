@@ -42,8 +42,9 @@ DOCS = {
             "Resumo", "Experiência Profissional", "Projetos", "Formação Acadêmica",
             "Habilidades", "Idiomas", "Desenvolvedor de Software Pleno",
             "Análise e Desenvolvimento de Sistemas", "Inteligência Artificial",
-            "Português", "Técnico em Informática", "fiscais", "profissionais",
-            "manipulação", "Piauí",
+            "Português", "Técnico em Informática", "fiscais", "manipulação", "Piauí",
+            # "%" sem escape vira comentário no LaTeX e corta o resto da linha.
+            "100% dos pagamentos passam por ele, gerados pelo financeiro ou pelo próprio cliente",
         ],
     },
     "en": {
@@ -52,6 +53,7 @@ DOCS = {
             "Summary", "Experience", "Projects", "Education", "Skills", "Languages",
             "Mid-level Software Developer", "Systems Analysis and Development",
             "Artificial Intelligence", "financial", "field sales", "Piauí",
+            "100% of payments, whether created by the finance team or by customers",
         ],
     },
 }
@@ -140,8 +142,10 @@ def check(lang: str, spec: dict, folder: Path) -> tuple[list[str], str]:
     if words < 150:
         errors.append(f"pouco texto extraído ({words} palavras): PDF pode ser imagem")
 
+    # Frases podem quebrar entre linhas na extração: compara com espaços normalizados.
+    flat = " ".join(text.split())
     for needle in COMMON_REQUIRED + spec["required"]:
-        if needle not in text:
+        if needle not in flat:
             errors.append(f"texto ausente na extração: {needle!r}")
 
     for label, pattern in BROKEN_PATTERNS.items():

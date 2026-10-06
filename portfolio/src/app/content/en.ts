@@ -60,7 +60,7 @@ export const EN: Content = {
         summary:
           'An app that supports therapy for people with speech apraxia, an acquired neurological disorder that affects speech production.',
         bullets: [
-          'Developed the cross-platform Flutter app with attention to accessibility and usability, and validated its features with healthcare professionals.',
+          'Developed the cross-platform Flutter app (about 8 screens) with attention to accessibility and usability. Its features were validated by 2 speech therapists.',
           "Implemented Python backend services for the app's data integration and processing.",
           'Integrated Kaldi speech recognition models on Linux (Ubuntu) and generated spectrograms to support voice analysis with speech therapists.',
         ],
@@ -76,7 +76,7 @@ export const EN: Content = {
         summary:
           'An Android app for including children with special needs, with interactions designed for autistic children.',
         bullets: [
-          "Led the Flutter development and organized the team's backlog, tasks, and deliveries using Agile practices.",
+          "Led the Flutter development in a 5-person team and organized the team's backlog, tasks, and deliveries using Agile practices.",
           "Validated the app's usability and therapeutic fit with psychologists.",
         ],
         linkLabel: 'Code on GitHub',
@@ -92,8 +92,8 @@ export const EN: Content = {
         bullets: [
           'wCompany 3G: 3 modules delivered in Java (Spring Boot) and Angular on a microservices architecture.',
           'Brazilian tax features: co-maintaining the NF-e and NFC-e electronic invoicing modules (including tax calculation rules) and supporting statutory reporting (SPED).',
-          'Customer database migrations involving Firebird (multiple versions) and Oracle (18 and 21); each customer runs its own database on a dedicated server.',
-          'Customer portal for invoice payments, integrated with the Iugu payments API.',
+          'Database migrations for 10+ customers involving Firebird (multiple versions) and Oracle (18 and 21); each customer runs its own database on a dedicated server.',
+          'Customer portal for invoice payments, integrated with the Iugu API: it handles 100% of payments, whether created by the finance team or by customers.',
           "wCRM, the company's cloud CRM: NestJS backend with SOLID and Clean Architecture, Kafka, Redis and Docker; React and TypeScript frontend; PostgreSQL reports (Prisma ORM) and tax data in MongoDB.",
           '20-person team (5 developers) using Scrum and Kanban; Docker and Kubernetes in company environments and Qlik for data analysis.',
         ],
