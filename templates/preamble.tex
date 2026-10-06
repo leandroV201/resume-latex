@@ -41,5 +41,10 @@
 
 \titlespacing*{\section}{0pt}{4pt}{1pt}
 
-% Empresa/instituição colada ao cargo e às datas logo abaixo
-\titlespacing*{\subsection}{0pt}{5pt}{0pt}
+% Entrada de experiência/projeto/formação em uma linha:
+%   \cventry{cargo ou curso}{empresa ou instituição}{local}{datas}
+% Cargo, empresa e local ficam na mesma linha de texto, separados por "|":
+% com o local alinhado à direita, parsers de ATS liam a cidade como outra empresa.
+\newcommand{\cventry}[4]{%
+  \par\addvspace{5pt}\noindent
+  {\bfseries #1} \textbar{} #2 \textbar{} #3\hfill{\small\itshape #4}\par\nopagebreak[4]}
