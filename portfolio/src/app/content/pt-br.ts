@@ -52,7 +52,7 @@ export const PT_BR: Content = {
       educationValue: 'Tecnólogo em ADS; pós em IA em andamento',
     },
     paragraphs: [
-      'A NextCompany atende negócios bem diferentes, então o trabalho passa por regras variadas: documentos fiscais (NF-e e NFC-e), tributos e SPED, rotinas bancárias e de caixa, vendas externas e até a manipulação de bolsas de nutrição parenteral. Entrei na empresa em 2025, no suporte técnico, passei a desenvolvedor júnior e, em abril de 2026, a pleno.',
+      'A NextCompany atende negócios bem diferentes, então o trabalho passa por regras variadas: documentos fiscais (NF-e e NFC-e), tributos e SPED, rotinas bancárias e de caixa, vendas externas e até a manipulação de bolsas de nutrição parenteral. Entrei na empresa em 2025 como desenvolvedor júnior e, em abril de 2026, passei a pleno.',
       'Além dos módulos do ERP, entreguei o portal do cliente para pagamento de faturas com a API da Iugu, por onde hoje passam 100% desses pagamentos, e migrei as bases de 10+ clientes envolvendo Firebird e Oracle.',
       'Dois dos meus projetos foram apps de saúde e inclusão: o Appraxi, validado com fonoaudiólogos, e o Expressa+, validado com psicólogos. Estou cursando pós-graduação em Inteligência Artificial.',
     ],
@@ -80,10 +80,6 @@ export const PT_BR: Content = {
               'wCRM, o CRM em nuvem da empresa: backend em NestJS com SOLID e Clean Architecture, Kafka, Redis e Docker; relatórios em PostgreSQL (Prisma ORM) e dados fiscais em MongoDB.',
               'Frontend do wCRM com React e TypeScript.',
             ],
-          },
-          support: {
-            title: 'Suporte Técnico',
-            bullets: [],
           },
         },
       },

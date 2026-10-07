@@ -95,13 +95,7 @@ describe('App', () => {
       el.textContent?.trim(),
     );
 
-    expect(roles).toEqual([
-      'Desenvolvedor de Software Pleno',
-      'Desenvolvedor de Software Júnior',
-      'Suporte Técnico',
-    ]);
-    // Cargo sem descrição não gera lista vazia.
-    expect(firstJob.querySelectorAll('.role')[2].querySelector('ul')).toBeNull();
+    expect(roles).toEqual(['Desenvolvedor de Software Pleno', 'Desenvolvedor de Software Júnior']);
   });
 
   it('começa na luz da manhã (séries de Monet)', async () => {

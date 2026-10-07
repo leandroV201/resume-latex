@@ -52,7 +52,7 @@ export const EN: Content = {
       educationValue: 'Associate degree in Systems Analysis; AI postgrad in progress',
     },
     paragraphs: [
-      'NextCompany serves very different businesses, so the work covers a wide range of rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding. I joined in 2025 in technical support, moved to junior developer and, in April 2026, to mid-level.',
+      'NextCompany serves very different businesses, so the work covers a wide range of rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding. I joined in 2025 as a junior developer and moved to mid-level in April 2026.',
       'Besides the ERP modules, I delivered the customer portal for invoice payments with the Iugu API, which now handles 100% of those payments, and migrated databases for 10+ customers involving Firebird and Oracle.',
       'Two of my projects were healthcare and inclusion apps: Appraxi, validated with speech therapists, and Expressa+, validated with psychologists. I am currently pursuing a postgraduate degree in Artificial Intelligence.',
     ],
@@ -80,10 +80,6 @@ export const EN: Content = {
               "wCRM, the company's cloud CRM: NestJS backend with SOLID and Clean Architecture, Kafka, Redis and Docker; PostgreSQL reports (Prisma ORM) and tax data in MongoDB.",
               'wCRM frontend with React and TypeScript.',
             ],
-          },
-          support: {
-            title: 'Technical Support',
-            bullets: [],
           },
         },
       },

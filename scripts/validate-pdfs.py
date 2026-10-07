@@ -72,7 +72,8 @@ MONTHS = {
     "may": 5, "jun": 6, "jul": 7, "ago": 8, "aug": 8, "set": 9, "sep": 9,
     "out": 10, "oct": 10, "nov": 11, "dez": 12, "dec": 12,
 }
-DATE_RE = re.compile(r"\b([A-Za-z]{3})[a-z]*\.? (\d{4})\b")
+# Aceita "Jan 2025", "April 2026" e o formato brasileiro "abril de 2026".
+DATE_RE = re.compile(r"\b([A-Za-z]{3})[a-z]*\.?(?: de)? (\d{4})\b")
 
 
 def tool(name: str) -> str:
