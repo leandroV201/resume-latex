@@ -171,6 +171,7 @@ export const SKILLS: Readonly<Record<SkillGroupId, readonly string[]>> = {
     'Docker',
     'Docker Compose',
     'Kubernetes',
+    'HAProxy',
     'CI/CD',
     'Git',
     'Linux',
