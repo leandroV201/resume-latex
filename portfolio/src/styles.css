@@ -876,12 +876,35 @@ a:hover {
   font-weight: 700;
 }
 
+.timeline-location {
+  margin-top: var(--s1);
+  font-size: var(--fs-s);
+}
+
+.roles {
+  display: grid;
+  gap: var(--s4);
+  margin-top: var(--s3);
+}
+
 .timeline-role {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s1) var(--s4);
-  margin: var(--s1) 0 var(--s3);
+  align-items: baseline;
+  gap: var(--s1) var(--s3);
+  margin-bottom: var(--s2);
   font-weight: 600;
+}
+
+.role-date {
+  font-size: var(--fs-s);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cargos sem descrição (ex.: suporte técnico) não deixam espaço sobrando. */
+.role:not(:has(.bullets)) .timeline-role {
+  margin-bottom: 0;
 }
 
 /* Projetos: etiquetas de museu */

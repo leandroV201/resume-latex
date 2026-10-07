@@ -72,11 +72,22 @@ export const PROJECTS: readonly ProjectFacts[] = [
 export const EXPERIENCE_IDS = ['nextcompany', 'comunicare'] as const;
 export type ExperienceId = (typeof EXPERIENCE_IDS)[number];
 
+export const ROLE_IDS = ['mid', 'junior', 'support', 'mobile'] as const;
+export type RoleId = (typeof ROLE_IDS)[number];
+
+export interface RoleFacts {
+  id: RoleId;
+  period: Period;
+}
+
 export interface ExperienceFacts {
   id: ExperienceId;
   company: string;
   location: string;
+  /** Período total na empresa. */
   period: Period;
+  /** Cargos na empresa, do mais recente para o mais antigo. */
+  roles: readonly RoleFacts[];
 }
 
 export const EXPERIENCE: readonly ExperienceFacts[] = [
@@ -85,12 +96,18 @@ export const EXPERIENCE: readonly ExperienceFacts[] = [
     company: 'NextCompany',
     location: 'Teresina, PI',
     period: { start: { year: 2025, month: 1 }, end: null },
+    roles: [
+      { id: 'mid', period: { start: { year: 2026, month: 4 }, end: null } },
+      { id: 'junior', period: { start: { year: 2025, month: 6 }, end: { year: 2026, month: 4 } } },
+      { id: 'support', period: { start: { year: 2025, month: 1 }, end: { year: 2025, month: 6 } } },
+    ],
   },
   {
     id: 'comunicare',
     company: 'Comunicare Solutions',
     location: 'Teresina, PI',
     period: { start: { year: 2021, month: 1 }, end: { year: 2022, month: 2 } },
+    roles: [{ id: 'mobile', period: { start: { year: 2021, month: 1 }, end: { year: 2022, month: 2 } } }],
   },
 ];
 

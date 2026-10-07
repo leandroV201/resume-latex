@@ -1,4 +1,4 @@
-import type { EducationId, ExperienceId, ProjectId, SkillGroupId } from './facts';
+import type { EducationId, ExperienceId, ProjectId, RoleId, SkillGroupId } from './facts';
 
 export type Lang = 'pt-BR' | 'en';
 
@@ -22,9 +22,13 @@ export interface ProjectText {
   privateCode?: string;
 }
 
-export interface ExperienceText {
+export interface RoleText {
   title: string;
   bullets: readonly string[];
+}
+
+export interface ExperienceText {
+  roles: Readonly<Partial<Record<RoleId, RoleText>>>;
 }
 
 export interface EducationText {

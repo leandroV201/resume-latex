@@ -44,7 +44,7 @@ export const EN: Content = {
       role: 'Role',
       company: 'Company',
       companyNote: 'ERP for several industries',
-      since: 'Since',
+      since: 'At the company since',
       project: 'Current project',
       stack: 'Project stack',
       base: 'Based in',
@@ -52,7 +52,7 @@ export const EN: Content = {
       educationValue: 'Associate degree in Systems Analysis; AI postgrad in progress',
     },
     paragraphs: [
-      'NextCompany serves very different businesses, so the work covers a wide range of rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding.',
+      'NextCompany serves very different businesses, so the work covers a wide range of rules: Brazilian electronic invoices (NF-e and NFC-e), tax calculation and SPED reporting, banking and cash management, field sales, and even parenteral nutrition bag compounding. I joined in 2025 in technical support, moved to junior developer and, in April 2026, to mid-level.',
       'Besides the ERP modules, I delivered the customer portal for invoice payments with the Iugu API, which now handles 100% of those payments, and migrated databases for 10+ customers involving Firebird and Oracle.',
       'Two of my projects were healthcare and inclusion apps: Appraxi, validated with speech therapists, and Expressa+, validated with psychologists. I am currently pursuing a postgraduate degree in Artificial Intelligence.',
     ],
@@ -63,19 +63,37 @@ export const EN: Content = {
     cta: 'See projects',
     items: {
       nextcompany: {
-        title: 'Mid-level Software Developer',
-        bullets: [
-          'wCompany 3G: 3 modules delivered in Java (Spring Boot) and Angular on a microservices architecture.',
-          'Brazilian tax features: co-maintaining the NF-e and NFC-e electronic invoicing modules (including tax calculation rules) and supporting statutory reporting (SPED).',
-          'Database migrations for 10+ customers involving Firebird (multiple versions) and Oracle (18 and 21); each customer runs its own database on a dedicated server.',
-          'Customer portal for invoice payments, integrated with the Iugu API: it handles 100% of payments, whether created by the finance team or by customers.',
-          "wCRM, the company's cloud CRM: NestJS backend with SOLID and Clean Architecture, Kafka, Redis and Docker; React and TypeScript frontend; PostgreSQL reports (Prisma ORM) and tax data in MongoDB.",
-          '20-person team (5 developers) using Scrum and Kanban; Docker and Kubernetes in company environments and Qlik for data analysis.',
-        ],
+        roles: {
+          mid: {
+            title: 'Mid-level Software Developer',
+            bullets: [
+              'wCompany 3G: 3 modules delivered in Java (Spring Boot) and Angular on a microservices architecture.',
+              'Brazilian tax features: co-maintaining the NF-e and NFC-e electronic invoicing modules (including tax calculation rules) and supporting statutory reporting (SPED).',
+              'Database migrations for 10+ customers involving Firebird (multiple versions) and Oracle (18 and 21); each customer runs its own database on a dedicated server.',
+              'Customer portal for invoice payments, integrated with the Iugu API: it handles 100% of payments, whether created by the finance team or by customers.',
+              '20-person team (5 developers) using Scrum and Kanban; Docker, Kubernetes and HAProxy in company environments and Qlik for data analysis.',
+            ],
+          },
+          junior: {
+            title: 'Junior Software Developer',
+            bullets: [
+              "wCRM, the company's cloud CRM: NestJS backend with SOLID and Clean Architecture, Kafka, Redis and Docker; PostgreSQL reports (Prisma ORM) and tax data in MongoDB.",
+              'wCRM frontend with React and TypeScript.',
+            ],
+          },
+          support: {
+            title: 'Technical Support',
+            bullets: [],
+          },
+        },
       },
       comunicare: {
-        title: 'Mobile and Backend Developer',
-        bullets: ['Built Appraxi: Flutter app, Python backend, and Kaldi speech recognition.'],
+        roles: {
+          mobile: {
+            title: 'Mobile and Backend Developer',
+            bullets: ['Built Appraxi: Flutter app, Python backend, and Kaldi speech recognition.'],
+          },
+        },
       },
     },
   },

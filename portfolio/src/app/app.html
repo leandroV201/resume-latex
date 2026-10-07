@@ -107,15 +107,28 @@
               <p class="timeline-date">{{ period(job.period) }}</p>
               <div class="timeline-body">
                 <h3>{{ job.company }}</h3>
-                <p class="timeline-role">
-                  <span>{{ text.title }}</span>
-                  <span class="with-icon muted"><app-icon name="mapPin" />{{ job.location }}</span>
-                </p>
-                <ul class="bullets">
-                  @for (bullet of text.bullets; track $index) {
-                    <li>{{ bullet }}</li>
+                <p class="timeline-location with-icon muted"><app-icon name="mapPin" />{{ job.location }}</p>
+                <!-- Um bloco por cargo, do mais recente ao mais antigo. -->
+                <ol class="roles">
+                  @for (role of job.roles; track role.id) {
+                    @let roleText = text.roles[role.id];
+                    <li class="role">
+                      <p class="timeline-role">
+                        <span>{{ roleText?.title }}</span>
+                        @if (job.roles.length > 1) {
+                          <span class="muted role-date">{{ period(role.period) }}</span>
+                        }
+                      </p>
+                      @if (roleText?.bullets?.length) {
+                        <ul class="bullets">
+                          @for (bullet of roleText!.bullets; track $index) {
+                            <li>{{ bullet }}</li>
+                          }
+                        </ul>
+                      }
+                    </li>
                   }
-                </ul>
+                </ol>
               </div>
             </li>
           }

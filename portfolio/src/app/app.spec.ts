@@ -88,6 +88,22 @@ describe('App', () => {
     expect(button.getAttribute('aria-expanded')).toBe('false');
   });
 
+  it('mostra a progressão de cargos na NextCompany', async () => {
+    const { page } = await render();
+    const firstJob = page.querySelector('.timeline-item')!;
+    const roles = [...firstJob.querySelectorAll('.role .timeline-role span:first-child')].map((el) =>
+      el.textContent?.trim(),
+    );
+
+    expect(roles).toEqual([
+      'Desenvolvedor de Software Pleno',
+      'Desenvolvedor de Software Júnior',
+      'Suporte Técnico',
+    ]);
+    // Cargo sem descrição não gera lista vazia.
+    expect(firstJob.querySelectorAll('.role')[2].querySelector('ul')).toBeNull();
+  });
+
   it('começa na luz da manhã (séries de Monet)', async () => {
     await render();
     expect(document.documentElement.dataset['light']).toBe('morning');
