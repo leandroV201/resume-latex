@@ -97,21 +97,23 @@
   --accent-soft: #dedcef;
 }
 
-/* Anoitecer: ferro escuro; os botões acendem como lampiões */
+/*
+ * Anoitecer (tema claro): luz quente de fim de tarde, ainda clara. Antes era uma paleta escura,
+ * e a passagem da tarde para o contato virava quase uma troca para o modo escuro. Agora só a
+ * temperatura muda (lilás → âmbar), no mesmo ritmo das outras luzes. No tema escuro o anoitecer
+ * continua sendo o ferro escuro com botões de lampião (regras mais abaixo).
+ */
 :root[data-light='dusk'] {
-  color-scheme: dark;
-  --paper: #1f2a36;
-  --surface: #283545;
-  --ink: #eceef0;
-  --muted: #aeb7c2;
-  --line: #3a4858;
-  --line-strong: #5e6e80;
-  --accent: #e2b45e;
-  --accent-hover: #eec77e;
-  --accent-ink: #1f2a36;
-  --accent-soft: #3b3a30;
-  --signal: #e2b45e;
-  --focus: #f0b861;
+  --paper: #ece6de;
+  --surface: #f7f3ed;
+  --ink: #2a2420;
+  --muted: #5e554c;
+  --line: #d8cec2;
+  --line-strong: #9b8e80;
+  --accent: #7a4f0c; /* lampião em tom de papel: contraste 7:1 com texto branco */
+  --accent-hover: #633f08;
+  --accent-soft: #efe2cb;
+  --signal: #a8740f;
 }
 
 /* ---------- Tema escuro: as mesmas luzes, à noite ---------- */
